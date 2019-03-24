@@ -109,7 +109,7 @@ class User extends Component {
           <NotFound/>
         )
 
-    const userDataComponent = <UserData {...this.state.pageData.user} />;
+    const userDataComponent = <UserData {...this.state.pageData.user} detailed={true} peak={this.state.pageData.peakElo}/>;
     const userTournamentDataComponents = this.state.pageData.tournaments.map(userDataObject => {
       return (
         <TournamentData {...userDataObject} />
@@ -118,7 +118,7 @@ class User extends Component {
 
     const userMatchDataComponents = this.state.pageData.matches.map(userDataObject => {
       return (
-        <MatchData {...userDataObject} />
+        <MatchData {...userDataObject} from={'user'}/>
       );
     })
 
@@ -134,6 +134,7 @@ class User extends Component {
                 <th>Country</th>
                 <th>Rank</th>
                 <th>Elo</th>
+                <th>Peak Elo</th>
                 <th>Matches Played</th>
                 <th>Matches Won</th>
                 <th>Matches Lost</th>
@@ -160,7 +161,7 @@ class User extends Component {
           <table>
             <thead>
               <tr>
-                <th>Match Sequence</th>
+                <th>Tournament</th>
                 <th>Elo of Player 1</th>
                 <th>Player 1 Username</th>
                 <th>Elo of Player 2</th>

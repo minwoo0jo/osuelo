@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class UserTournamentData extends Component {
+class TournamentData extends Component {
   render() {
     return (
       <tr>
@@ -12,4 +12,4 @@ class UserTournamentData extends Component {
   }
 }
 
-export default UserTournamentData;
+export default TournamentData;

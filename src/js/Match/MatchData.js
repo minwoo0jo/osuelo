@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class UserMatchData extends Component {
+class MatchData extends Component {
   render() {
+    let info = this.props.matchSequence
+    if(this.props.from === 'user')
+      info = this.props.tournament.tournamentName
     return (
       <tr>
-        <td>{this.props.matchSequence}</td>
+        <td>{info}</td>
         <td>{this.props.elo1.toFixed(1)}</td>
         <td><Link to={{pathname: `/users/id/${this.props.player1Id}`, id: this.props.player1Id}} >{this.props.player1}</Link></td>
         <td>{this.props.elo2.toFixed(1)}</td>
@@ -16,4 +19,4 @@ class UserMatchData extends Component {
   }
 }
 
-export default UserMatchData;
+export default MatchData;

@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../resources/css/TournamentList.css';
 import TournamentData from './TournamentData.js';
 import NotFound from '../NotFound.js';
+import Pagination from '../Paging/Pagination.js';
 import url from '../../resources/config.json';
 
 class TournamentList extends Component {
@@ -22,7 +23,7 @@ class TournamentList extends Component {
 
   componentDidMount () {
     axios.get(url.api + 'tournaments/page/' + this.state.pageNum).then((response) => {
-      if(response.data.length === 0)
+      if(response.data[1].length === 0)
         this.setState({pageData: null})
       else
         this.setState({pageData: response.data})
@@ -33,17 +34,36 @@ class TournamentList extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(this.state.pageData !== undefined && newProps.location.page !== undefined) {
+    if(this.state.pageData !== undefined && newProps.location.pathname !== this.props.location.pathname) {
       this.setState({pageData: undefined})
-      axios.get(url.api + 'tournaments/page/' + newProps.location.page).then((response) => {
-        if(response.data.length === 0)
+      if(newProps.location.page !== undefined) {
+        axios.get(url.api + 'tournaments/page/' + newProps.location.page).then((response) => {
+          if(response.data[1].length === 0)
+            this.setState({pageData: null, pageNum: newProps.location.page})
+          else
+            this.setState({pageData: response.data, pageNum: newProps.location.page})
+        }).catch((error) => {
+          console.log(error)
           this.setState({pageData: null, pageNum: newProps.location.page})
+        })
+      }
+      else {
+        let path = newProps.location.pathname.split('/')
+        let page = undefined
+        if(path[path.length - 1] === 'tournaments')
+          page = 1
         else
-          this.setState({pageData: response.data, pageNum: newProps.location.page})
-      }).catch((error) => {
-        console.log(error)
-        this.setState({pageData: null, pageNum: newProps.location.page})
-      })
+          page = parseInt(path[path.length - 1])
+        axios.get(url.api + newProps.location.pathname).then((response) => {
+          if(response.data[1].length === 0)
+            this.setState({pageData: null, pageNum: page})
+          else
+            this.setState({pageData: response.data, pageNum: page})
+        }).catch((error) => {
+          console.log(error)
+          this.setState({pageData: null, pageNum: page})
+        })
+      }
     }
   }
 
@@ -57,7 +77,7 @@ class TournamentList extends Component {
       return (
         <NotFound />
       )
-    const tournamentDataComponents = this.state.pageData.map(tournamentDataObject => {
+    const tournamentDataComponents = this.state.pageData[1].map(tournamentDataObject => {
       return (
         <TournamentData {...tournamentDataObject} />
       );
@@ -68,6 +88,11 @@ class TournamentList extends Component {
         <div>
           <h2>Tournament Listing</h2>
           <h4>Page {this.state.pageNum}</h4>
+          <Pagination
+            type={'tournaments'}
+            pageNum={this.state.pageNum}
+            count={this.state.pageData[0]}
+          />
           <table>
             <thead>
               <tr>

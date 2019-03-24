@@ -8,7 +8,7 @@ class UserData extends Component {
         <tr>
           <td>{this.props.userId}</td>
           <td><Link to={`/users/id/${this.props.userId}`}>{this.props.userName}</Link></td>
-          <td>{this.props.country}</td>
+          <td><Link to={{pathname: `/users/country/${this.props.country}/1`, page: 1}}>{this.props.country}</Link></td>
           <td>{this.props.rank}</td>
           <td>{this.props.elo.toFixed(1)}</td>
         </tr>
@@ -17,9 +17,10 @@ class UserData extends Component {
       <tr>
         <td>{this.props.userId}</td>
         <td><Link to={`/users/id/${this.props.userId}`}>{this.props.userName}</Link></td>
-        <td>{this.props.country}</td>
+        <td><Link to={{pathname: `/users/country/${this.props.country}/1`, page: 1}}>{this.props.country}</Link></td>
         <td>{this.props.rank}</td>
         <td>{this.props.elo.toFixed(1)}</td>
+        <td>{this.props.peak.toFixed(1)}</td>
         <td>{this.props.numMatches}</td>
         <td>{this.props.numWins}</td>
         <td>{this.props.numLosses}</td>

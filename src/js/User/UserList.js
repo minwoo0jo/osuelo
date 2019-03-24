@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../resources/css/UserList.css';
 import UserData from './UserData.js';
 import NotFound from '../NotFound.js';
+import Pagination from '../Paging/Pagination.js';
 import url from '../../resources/config.json';
 
 class UserList extends Component {
@@ -32,7 +33,7 @@ class UserList extends Component {
     else
       endpoint += 'page/'
     axios.get(endpoint + this.state.pageNum).then((response) => {
-      if(response.data.length === 0)
+      if(response.data[1].length === 0)
         this.setState({pageData: null})
       else
         this.setState({pageData: response.data})
@@ -40,6 +41,45 @@ class UserList extends Component {
       console.log(error)
       this.setState({pageData: null})
     })
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(this.state.pageData !== undefined && newProps.location.pathname !== this.props.location.pathname) {
+      this.setState({pageData: undefined})
+      if(newProps.location.page !== undefined) {
+        axios.get(url.api + newProps.location.pathname).then((response) => {
+          if(response.data[1].length === 0)
+            this.setState({pageData: null, pageNum: newProps.location.page, country: newProps.location.country})
+          else
+            this.setState({pageData: response.data, pageNum: newProps.location.page, country: newProps.location.country})
+        }).catch((error) => {
+          console.log(error)
+          this.setState({pageData: null, pageNum: newProps.location.page, country: newProps.location.country})
+        })
+      }
+      else {
+        let path = newProps.location.pathname.split('/')
+        let page = undefined
+        let country = 'Global'
+        if(path[path.length - 3] === 'country' || path[path.length - 2] === 'page') {
+          page = parseInt(path[path.length - 1])
+        }
+        else
+          page = 1
+        if(path[path.length - 2] === 'country')
+          country = path[path.length - 1]
+        else if(path[path.length - 3] === 'country')
+          country = path[path.length - 2]
+        axios.get(url.api + newProps.location.pathname).then((response) => {
+          if(response.data[1].length === 0)
+            this.setState({pageData: null, pageNum: page, country: country})
+          else
+            this.setState({pageData: response.data, pageNum: page, country: country})
+        }).catch((error) => {
+          this.setState({pageData: null, pageNum: page, country: country})
+        })
+      }
+    }
   }
 
 
@@ -53,7 +93,7 @@ class UserList extends Component {
       return (
         <NotFound />
       )
-    const userDataComponents = this.state.pageData.map(userDataObject => {
+    const userDataComponents = this.state.pageData[1].map(userDataObject => {
       return (
         <UserData {...userDataObject} detailed={false} />
       )
@@ -64,6 +104,12 @@ class UserList extends Component {
         <div>
           <h2>{this.state.country} User Listing</h2>
           <h4>Page {this.state.pageNum}</h4>
+          <Pagination
+            type={'users'}
+            pageNum={this.state.pageNum}
+            count={this.state.pageData[0]}
+            country={this.state.country}
+          />
           <table>
             <thead>
               <tr>
