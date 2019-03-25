@@ -16,7 +16,7 @@ class UserData extends Component {
     return (
       <tr>
         <td>{this.props.userId}</td>
-        <td><Link to={`/users/id/${this.props.userId}`}>{this.props.userName}</Link></td>
+        <td><a href={'https://osu.ppy.sh/u/' + this.props.userId}>{this.props.userName}</a></td>
         <td><Link to={{pathname: `/users/country/${this.props.country}/1`, page: 1}}>{this.props.country}</Link></td>
         <td>{this.props.rank}</td>
         <td>{this.props.elo.toFixed(1)}</td>
