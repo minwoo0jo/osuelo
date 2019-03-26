@@ -126,11 +126,11 @@ class User extends Component {
     
     const pastNames = this.state.pageData.pastNames.map(name => {
       return (
-        <h6>{name}</h6>
+        <h6>Also known as {name}</h6>
       )
     })
 
-    const oldId = this.state.pageData.oldId !== 0 ? <>{this.state.pageData.oldId}</> : <></>
+    const oldId = this.state.pageData.oldId !== 0 ? <>UserId before restriction: {this.state.pageData.oldId}</> : <></>
 
     const userDataComponent = <UserData {...this.state.pageData.user} detailed={true} peak={this.state.pageData.peakElo}/>;
     const userTournamentDataComponents = this.state.pageData.tournaments.map(userDataObject => {
