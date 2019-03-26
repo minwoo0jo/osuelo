@@ -7,16 +7,28 @@ import MatchData from '../Match/MatchData.js';
 import NotFound from '../NotFound.js';
 import url from '../../resources/config.json';
 
+
 class User extends Component {
   constructor(props) {
     super(props)
+    this.handleMouseIn = this.handleMouseIn.bind(this)
+    this.handleMouseOut = this.handleMouseOut.bind(this)
     var id = this.props.match.params.id
     var name = this.props.match.params.name
     this.state = {
       pageData: undefined,
       userId: id,
-      userName: name
+      userName: name,
+      hover: false
     }
+  }
+
+  handleMouseIn() {
+    this.setState({hover: true})
+  }
+  
+  handleMouseOut() {
+    this.setState({hover: false})
   }
 
   componentDidMount () {
@@ -99,6 +111,10 @@ class User extends Component {
 
   render() {
 
+    const hoverStyle = {
+      display: this.state.hover ? 'block' : 'none'
+    }
+
     if(this.state.pageData === undefined)
       return (
         <p>Loading</p>
@@ -107,6 +123,12 @@ class User extends Component {
         return (
           <NotFound/>
         )
+    
+    const pastNames = this.state.pageData.pastNames.map(name => {
+      return (
+        <h6>{name}</h6>
+      )
+    })
 
     const userDataComponent = <UserData {...this.state.pageData.user} detailed={true} peak={this.state.pageData.peakElo}/>;
     const userTournamentDataComponents = this.state.pageData.tournaments.map(userDataObject => {
@@ -124,7 +146,13 @@ class User extends Component {
     return (
       <div className="User">
         <div>
-          <h2>Userpage for {this.state.pageData.user.userName}</h2>
+          <h2 onMouseOver={this.handleMouseIn} onMouseOut={this.handleMouseOut}>
+            Userpage for {this.state.pageData.user.userName}
+          </h2>
+          <div style={hoverStyle}>
+            {pastNames}
+            {this.state.pageData.oldId}
+          </div>
           <table>
             <thead>
               <tr>
