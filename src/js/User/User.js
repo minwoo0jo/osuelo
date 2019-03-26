@@ -130,6 +130,8 @@ class User extends Component {
       )
     })
 
+    const oldId = this.state.pageData.oldId !== 0 ? <>{this.state.pageData.oldId}</> : <></>
+
     const userDataComponent = <UserData {...this.state.pageData.user} detailed={true} peak={this.state.pageData.peakElo}/>;
     const userTournamentDataComponents = this.state.pageData.tournaments.map(userDataObject => {
       return (
@@ -151,7 +153,7 @@ class User extends Component {
           </h2>
           <div style={hoverStyle}>
             {pastNames}
-            {this.state.pageData.oldId}
+            {oldId}
           </div>
           <table>
             <thead>
