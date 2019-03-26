@@ -17,7 +17,6 @@ class User extends Component {
       userId: id,
       userName: name
     }
-    
   }
 
   componentDidMount () {

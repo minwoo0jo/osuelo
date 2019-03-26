@@ -11,7 +11,6 @@ class Router extends Component {
 
   render() {
     return (
-      <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/tournaments" render={(props) => <TournamentList {...props} page={1} /> } />
@@ -26,7 +25,6 @@ class Router extends Component {
           <Route path="/users/:name" component={User} />
           <Route component={NotFound} status={404} />
         </Switch>
-      </BrowserRouter>
     );
   }
 }
