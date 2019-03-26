@@ -110,7 +110,7 @@ class UserList extends Component {
             count={this.state.pageData[0]}
             country={this.state.country}
           />
-          <table>
+          <table className>
             <thead>
               <tr>
                 <th>UserId</th>

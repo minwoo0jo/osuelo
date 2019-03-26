@@ -5,10 +5,14 @@ class Pagination extends Component {
     constructor(props) {
         super(props)
         var destination = '/' + this.props.type + '/'
-        if(this.props.country !== undefined && this.props.country !== 'Global')
-            destination += 'country/' + this.props.country + '/'
-        else
-            destination += 'page/'
+        if(this.props.type === "country")
+            destination = '/users/country'
+        else {
+            if(this.props.country !== undefined && this.props.country !== 'Global')
+                destination += 'country/' + this.props.country + '/'
+            else
+                destination += 'page/'
+        }
         this.state = {
             destination: destination,
             current: parseInt(this.props.pageNum),

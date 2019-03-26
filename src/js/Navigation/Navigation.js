@@ -26,8 +26,8 @@ class Navigation extends Component {
                             <NavDropdown.Item href="/users">
                                 <NavItem>Global Elo Ranking</NavItem>
                             </NavDropdown.Item>
-                            <NavDropdown.Item>
-                                <NavItem>Placeholder</NavItem>
+                            <NavDropdown.Item href="/users/country/page/1">
+                                <NavItem>Country Ranking</NavItem>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
