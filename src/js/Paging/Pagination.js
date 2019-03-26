@@ -6,7 +6,7 @@ class Pagination extends Component {
         super(props)
         var destination = '/' + this.props.type + '/'
         if(this.props.type === "country")
-            destination = '/users/country'
+            destination = '/users/country/page/'
         else {
             if(this.props.country !== undefined && this.props.country !== 'Global')
                 destination += 'country/' + this.props.country + '/'
