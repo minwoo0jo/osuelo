@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../../resources/css/User.css';
 import UserData from './UserData.js';
+import EloHistory from './EloHistory.js';
 import TournamentData from '../Tournament/TournamentData.js';
 import MatchData from '../Match/MatchData.js';
 import NotFound from '../NotFound.js';
@@ -159,6 +160,8 @@ class User extends Component {
             {pastNames}
             {oldId}
           </div>
+          <h2>Elo History</h2>
+          <EloHistory eloHistory={this.state.pageData.eloHistory}/>
           <table>
             <thead>
               <tr>
