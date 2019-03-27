@@ -5,12 +5,15 @@ import '../../../node_modules/react-linechart/dist/styles.css';
 class EloHistory extends Component {
   render() {
     let points = []
-    let iter = 0
-    for(var i = this.props.eloHistory.length > 30 ? this.props.eloHistory.length - 30 : 0;
+    let bottom = this.props.eloHistory[this.props.eloHistory.length - 1]
+    let peak = this.props.peakElo + 50
+    for(var i = this.props.eloHistory.length > 15 ? this.props.eloHistory.length - 15 : 0;
         i < this.props.eloHistory.length; i++) {
-        points.push({x: iter, y: this.props.eloHistory[i].toFixed(1)})
-        iter = iter + 1
+        if(bottom > this.props.eloHistory[i])
+            bottom = this.props.eloHistory[i]
+        points.push({x: i, y: this.props.eloHistory[i].toFixed(0)})
     }
+    points.push({x: this.props.eloHistory.length, y: this.props.elo})
     const data = [
         {									
             color: "steelblue", 
@@ -21,12 +24,14 @@ class EloHistory extends Component {
     return (
         <div>
             <div className="App">
-                <h1>My First LineChart</h1>
+                <p>Elo History</p>
                 <LineChart 
                     width={600}
-                    height={400}
+                    height={300}
                     xLabel={"Match"}
                     yLabel={"Elo"}
+                    yMin={bottom.toFixed(0) - 50}
+                    yMax={peak.toFixed(0)}
                     data={data}
                 />
             </div>				

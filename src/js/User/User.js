@@ -160,8 +160,6 @@ class User extends Component {
             {pastNames}
             {oldId}
           </div>
-          <h2>Elo History</h2>
-          <EloHistory eloHistory={this.state.pageData.eloHistory}/>
           <table>
             <thead>
               <tr>
@@ -181,6 +179,9 @@ class User extends Component {
               {userDataComponent}
             </tbody>
           </table>
+          <br />
+          <EloHistory eloHistory={this.state.pageData.eloHistory} peakElo={this.state.pageData.peakElo} elo={this.state.pageData.user.elo}/>
+          <br />
           <h2>Tournaments Played</h2>
           <table>
             <thead>
