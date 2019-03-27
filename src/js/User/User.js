@@ -132,7 +132,11 @@ class User extends Component {
 
     const oldId = this.state.pageData.oldId !== 0 ? <>UserId before restriction: {this.state.pageData.oldId}</> : <></>
 
-    const userDataComponent = <UserData {...this.state.pageData.user} detailed={true} peak={this.state.pageData.peakElo}/>;
+    const userDataComponent = <UserData
+      {...this.state.pageData.user} detailed={true}
+      peak={this.state.pageData.peakElo}
+      oldId={this.state.pageData.oldId}
+    />;
     const userTournamentDataComponents = this.state.pageData.tournaments.map(userDataObject => {
       return (
         <TournamentData {...userDataObject} />

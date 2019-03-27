@@ -32,7 +32,7 @@ class Navigation extends Component {
                         </NavDropdown>
                     </Nav>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search not done lol" />
+                        <FormControl type="text" placeholder="Search not done" />
                         <Button variant="outline-success">Search</Button>
                     </Form>
                 </Navbar.Collapse>
