@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../resources/css/UserList.css';
+import '../../resources/css/List.css';
 import CountryData from './CountryData.js';
 import NotFound from '../NotFound.js';
 import Pagination from '../Paging/Pagination.js';
@@ -17,7 +18,8 @@ class CountryList extends Component {
     
     this.state = {
       pageData: undefined,
-      pageNum: page
+      pageNum: page,
+      total: 0
     }
   }
 
@@ -27,9 +29,9 @@ class CountryList extends Component {
       if(response.data.length === 0 || response.data.length - 1 < (this.state.pageNum - 1) * 50)
         this.setState({pageData: null})
       else
-        this.setState({pageData: response.data.slice((this.state.pageNum - 1) * 50)})
+        this.setState({pageData: response.data.slice((this.state.pageNum - 1) * 50), total: response.data.length})
       if(this.state.pageData.length > 50)
-        this.setState({pageData: this.state.pageData.slice(0, 50)})
+        this.setState({pageData: this.state.pageData.slice(0, 50), total: response.data.length})
     }).catch((error) => {
       console.log(error)
       this.setState({pageData: null})
@@ -44,9 +46,9 @@ class CountryList extends Component {
                 if(response.data.length === 0 || response.data.length - 1 < (newProps.location.page - 1) * 50)
                     this.setState({pageData: null, pageNum: newProps.location.page})
                 else
-                    this.setState({pageData: response.data.slice((newProps.location.page - 1) * 50), pageNum: newProps.location.page})
+                    this.setState({pageData: response.data.slice((newProps.location.page - 1) * 50), pageNum: newProps.location.page, total: response.data.length})
                 if(this.state.pageData.length > 50)
-                    this.setState({pageData: this.state.pageData.slice(0, 50)})
+                    this.setState({pageData: this.state.pageData.slice(0, 50), total: response.data.length})
             }).catch((error) => {
                 console.log(error)
                 this.setState({pageData: null, pageNum: newProps.location.page})
@@ -62,9 +64,9 @@ class CountryList extends Component {
                 if(response.data.length === 0 || response.data.length - 1 < (page - 1) * 50)
                     this.setState({pageData: null, pageNum: page})
                 else
-                    this.setState({pageData: response.data.slice((page - 1) * 50), pageNum: page})
+                    this.setState({pageData: response.data.slice((page - 1) * 50), pageNum: page, total: response.data.length})
                 if(this.state.pageData.length > 50)
-                    this.setState({pageData: this.state.pageData.slice(0, 50)})
+                    this.setState({pageData: this.state.pageData.slice(0, 50), total: response.data.length})
             }).catch((error) => {
                 console.log(error)
                 this.setState({pageData: null, pageNum: page})
@@ -94,15 +96,19 @@ class CountryList extends Component {
       <div className="User">
         <div>
           <h2>Country Listing</h2>
-          <h4>Page {this.state.pageNum}</h4>
-          <Pagination
-            type={'country'}
-            pageNum={this.state.pageNum}
-            count={this.state.pageData.length}
-          />
+          <p>Page {this.state.pageNum}</p>
+          <div className="TableHeader">
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.total, this.state.pageNum * 50)} of {this.state.total} results.</p>
+            <Pagination
+                type={'country'}
+                pageNum={this.state.pageNum}
+                count={this.state.pageData.length}
+            />
+          </div>
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>Country</th>
                 <th>Number of Users</th>
               </tr>
@@ -111,6 +117,14 @@ class CountryList extends Component {
               {countryDataComponents}
             </tbody>
           </table>
+          <div className="TableHeader">
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.total, this.state.pageNum * 50)} of {this.state.total} results.</p>
+            <Pagination
+                type={'country'}
+                pageNum={this.state.pageNum}
+                count={this.state.pageData.length}
+            />
+          </div>
         </div>
       </div>
     )

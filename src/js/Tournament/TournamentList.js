@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../resources/css/TournamentList.css';
+import '../../resources/css/List.css';
 import TournamentData from './TournamentData.js';
 import NotFound from '../NotFound.js';
 import Pagination from '../Paging/Pagination.js';
@@ -87,12 +88,15 @@ class TournamentList extends Component {
       <div className="Tournament">
         <div>
           <h2>Tournament Listing</h2>
-          <h4>Page {this.state.pageNum}</h4>
-          <Pagination
-            type={'tournaments'}
-            pageNum={this.state.pageNum}
-            count={this.state.pageData[0]}
-          />
+          <p>Page {this.state.pageNum}</p>
+          <div className="TableHeader">
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.pageData[0], this.state.pageNum * 50)} of {this.state.pageData[0]} results.</p>
+            <Pagination
+              type={'tournaments'}
+              pageNum={this.state.pageNum}
+              count={this.state.pageData[0]}
+            />
+          </div>
           <table>
             <thead>
               <tr>
@@ -104,6 +108,14 @@ class TournamentList extends Component {
               {tournamentDataComponents}
             </tbody>
           </table>
+          <div className="TableHeader">
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.pageData[0], this.state.pageNum * 50)} of {this.state.pageData[0]} results.</p>
+            <Pagination
+              type={'tournaments'}
+              pageNum={this.state.pageNum}
+              count={this.state.pageData[0]}
+            />
+          </div>
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../resources/css/UserList.css';
+import '../../resources/css/List.css';
 import UserData from './UserData.js';
 import NotFound from '../NotFound.js';
 import Pagination from '../Paging/Pagination.js';
@@ -102,28 +103,40 @@ class UserList extends Component {
     return (
       <div className="User">
         <div>
-          <h2>{this.state.country} User Listing</h2>
-          <h4>Page {this.state.pageNum}</h4>
-          <Pagination
-            type={'users'}
-            pageNum={this.state.pageNum}
-            count={this.state.pageData[0]}
-            country={this.state.country}
-          />
+          <h2>{this.state.country} User Elo Ranking</h2>
+          <p>Page {this.state.pageNum}</p>
+          <div className="TableHeader">
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.pageData[0], this.state.pageNum * 50)} of {this.state.pageData[0]} results.</p>
+            <Pagination
+              type={'users'}
+              pageNum={this.state.pageNum}
+              count={this.state.pageData[0]}
+              country={this.state.country}
+            />
+          </div>
           <table className>
             <thead>
               <tr>
-                <th>UserId</th>
-                <th>UserName</th>
-                <th>Country</th>
                 <th>Rank</th>
+                <th>Player Name</th>
                 <th>Elo</th>
+                <th>Win Rate</th>
+                <th>Matches Played</th>
               </tr>
             </thead>
             <tbody>
               {userDataComponents}
             </tbody>
           </table>
+          <div className="TableHeader">
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.pageData[0], this.state.pageNum * 50)} of {this.state.pageData[0]} results.</p>
+            <Pagination
+              type={'users'}
+              pageNum={this.state.pageNum}
+              count={this.state.pageData[0]}
+              country={this.state.country}
+            />
+          </div>
         </div>
       </div>
     )

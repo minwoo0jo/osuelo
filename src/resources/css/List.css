@@ -1,0 +1,32 @@
+table{
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #c5d4ff;
+}
+th, td {
+    text-align: left;
+    padding: 10px;
+    font-size: 12pt;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+th {
+    background-color: #e3e1fa;
+    border-bottom: 2px solid #c5d4ff;
+}
+
+tr:nth-child(odd) {
+    background-color: #efedfa;
+}
+
+tr:nth-child(even) {
+    background-color: #e3e1fa;
+}
+
+.TableHeader {
+    text-align: center;
+    font-size: 10pt;
+}

@@ -164,8 +164,8 @@ class User extends Component {
             <thead>
               <tr>
                 <th>UserId</th>
+                <th></th>
                 <th>UserName</th>
-                <th>Country</th>
                 <th>Rank</th>
                 <th>Elo</th>
                 <th>Peak Elo</th>
@@ -180,7 +180,11 @@ class User extends Component {
             </tbody>
           </table>
           <br />
-          <EloHistory eloHistory={this.state.pageData.eloHistory} peakElo={this.state.pageData.peakElo} elo={this.state.pageData.user.elo}/>
+          {this.state.pageData.user.numMatches > 0 ?
+          <EloHistory
+            eloHistory={this.state.pageData.eloHistory}
+            peakElo={this.state.pageData.peakElo}
+            elo={this.state.pageData.user.elo}/> : <></>}
           <br />
           <h2>Tournaments Played</h2>
           <table>
