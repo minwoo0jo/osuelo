@@ -113,11 +113,11 @@ class Tournament extends Component {
           <table>
             <thead>
               <tr>
-                <th>UserId</th>
-                <th>UserName</th>
-                <th>Country</th>
                 <th>Rank</th>
+                <th>Player Name</th>
                 <th>Elo</th>
+                <th>Win Rate</th>
+                <th>Matches Played</th>
               </tr>
             </thead>
             <tbody>
