@@ -3,3 +3,17 @@
 	margin-top: 20px;
 	text-align: left;
 }
+.UserMain {
+	width: 90%;
+}
+
+.UserSideBar {
+    width: 15%;
+    height: 30vh;
+    position: sticky;
+	top: 20px;
+	margin-bottom: 50px;
+}
+.card-body {
+	text-align: center;
+}

@@ -127,13 +127,13 @@ class User extends Component {
     
     const pastNames = this.state.pageData.pastNames.map(name => {
       return (
-        <h6>Also known as {name}</h6>
+        <h6>{name}</h6>
       )
     })
 
-    const name = this.state.pageData.user.userName.startsWith('@RU') ? 'RestrictedUser' : this.state.pageData.user.userName
+    const name = this.state.pageData.user.userName.startsWith('@RU') ? 'Restricted User' : this.state.pageData.user.userName
 
-    const oldId = this.state.pageData.oldId !== 0 ? <>UserId before restriction: {this.state.pageData.oldId}</> : <></>
+    const oldId = this.state.pageData.oldId !== 0 ? <>User Id: {this.state.pageData.oldId}</> : <></>
 
     const userDataComponent = <UserData
       {...this.state.pageData.user} detailed={true}
@@ -151,23 +151,29 @@ class User extends Component {
         <MatchData {...userDataObject} from={'user'}/>
       );
     })
-
     return (
       <div className="User">
         <div>
-          <h2 onMouseOver={this.handleMouseIn} onMouseOut={this.handleMouseOut}>
-            Userpage for {name}
-          </h2>
-          <div style={hoverStyle}>
-            {pastNames}
-            {oldId}
+          <div className="Wrapper">
+          <div className="UserSideBar">
+            <div className="card" style={{width: '10rem'}}>
+              <img className="card-img-top" src={'https://a.ppy.sh/' + this.state.pageData.user.userId + '_1552467424.jpeg'} alt="Profile"/>
+              <div className="card-body">
+                <h4 onMouseOver ={this.handleMouseIn} onMouseOut={this.handleMouseOut} className="card-text">{name}</h4>
+              </div>
+            </div>
+            <div style={hoverStyle}>
+              <h6>Also known as:</h6>
+              {pastNames}
+              {oldId}
+            </div>
           </div>
+          <div className="UserMain">
           <table>
             <thead>
               <tr>
-                <th>UserId</th>
-                <th></th>
-                <th>UserName</th>
+                <th>User Id</th>
+                <th>Username</th>
                 <th>Rank</th>
                 <th>Elo</th>
                 <th>Peak Elo</th>
@@ -187,7 +193,9 @@ class User extends Component {
             eloHistory={this.state.pageData.eloHistory}
             peakElo={this.state.pageData.peakElo}
             elo={this.state.pageData.user.elo}/> : <></>}
-          <br />
+          </div>
+          </div>
+          <br /><br /><br /><br />
           <h2>Tournaments Played</h2>
           <table>
             <thead>
