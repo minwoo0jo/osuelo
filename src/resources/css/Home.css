@@ -1,0 +1,24 @@
+.Wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.Main, .SideBar {
+    padding: 15px;
+}
+.Main {
+    width: 60%;
+    height: 150vh;
+}
+.MainBody {
+    text-align: left;
+    font-size: 20pt;
+}
+.AboutBody {
+    text-align: left;
+}
+.SideBar {
+    width: 25%;
+    height: 30vh;
+    position: sticky;
+    top: 0;
+}

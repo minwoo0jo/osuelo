@@ -131,6 +131,8 @@ class User extends Component {
       )
     })
 
+    const name = this.state.pageData.user.userName.startsWith('@RU') ? 'RestrictedUser' : this.state.pageData.user.userName
+
     const oldId = this.state.pageData.oldId !== 0 ? <>UserId before restriction: {this.state.pageData.oldId}</> : <></>
 
     const userDataComponent = <UserData
@@ -154,7 +156,7 @@ class User extends Component {
       <div className="User">
         <div>
           <h2 onMouseOver={this.handleMouseIn} onMouseOut={this.handleMouseOut}>
-            Userpage for {this.state.pageData.user.userName}
+            Userpage for {name}
           </h2>
           <div style={hoverStyle}>
             {pastNames}

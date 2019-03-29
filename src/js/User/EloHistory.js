@@ -3,6 +3,10 @@ import LineChart from 'react-linechart';
 import '../../../node_modules/react-linechart/dist/styles.css';
 
 class EloHistory extends Component {
+    handleHover(point) {
+        console.log(point)
+    }
+
   render() {
     let points = []
     let bottom = this.props.eloHistory[this.props.eloHistory.length - 1]
@@ -16,7 +20,7 @@ class EloHistory extends Component {
     points.push({x: this.props.eloHistory.length, y: this.props.elo})
     const data = [
         {									
-            color: "steelblue", 
+            color: "orange", 
             points: points
         }
     ]
@@ -32,6 +36,7 @@ class EloHistory extends Component {
                     yLabel={"Elo"}
                     yMin={bottom.toFixed(0) - 50}
                     yMax={peak.toFixed(0)}
+                    onPointHover={(event, point) => this.handleHover(event)}
                     data={data}
                 />
             </div>				

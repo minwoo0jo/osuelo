@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 class UserData extends Component {
   render() {
+    const name = this.props.userName.startsWith('@RU') ? 'RestrictedUser' : this.props.userName
     const id = this.props.oldId === 0 ? this.props.userId : this.props.oldId
     var imgPath = undefined
     try {
@@ -20,7 +21,7 @@ class UserData extends Component {
               <img src={imgPath} alt={this.props.country}/>
             </Link>
             {' '}
-            <Link to={`/users/id/${this.props.userId}`}>{this.props.userName}</Link></td>
+            <Link to={`/users/id/${this.props.userId}`}>{name}</Link></td>
           <td><b>{this.props.elo.toFixed(1)}</b></td>
           <td>{this.props.winRate.toFixed(2)}</td>
           <td>{this.props.numMatches}</td>
@@ -34,7 +35,7 @@ class UserData extends Component {
             <img src={imgPath} alt={this.props.country}/>
           </Link>
         </td>
-        <td><a href={'https://osu.ppy.sh/u/' + id}>{this.props.userName}</a></td>
+        <td><a href={'https://osu.ppy.sh/u/' + id}>{name}</a></td>
         <td><Link to={`/users/page/${Math.ceil(this.props.rank * 1.0 / 50)}`}>{this.props.rank}</Link></td>
         <td>{this.props.elo.toFixed(1)}</td>
         <td>{this.props.peak.toFixed(1)}</td>

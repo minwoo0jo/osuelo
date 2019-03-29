@@ -30,6 +30,11 @@ class Navigation extends Component {
                                 <NavItem>Country Ranking</NavItem>
                             </NavDropdown.Item>
                         </NavDropdown>
+                        <Navbar.Text>
+                            <Link to="/about">
+                                <NavItem>About</NavItem>
+                            </Link>
+                        </Navbar.Text>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search not done" />
