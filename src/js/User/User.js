@@ -163,7 +163,7 @@ class User extends Component {
               </div>
             </div>
             <div style={hoverStyle}>
-              <h6>Also known as:</h6>
+              <h6>{this.state.pageData.pastNames.length > 0 ? 'Also known as:' : ''}</h6>
               {pastNames}
               {oldId}
             </div>
