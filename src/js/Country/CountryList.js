@@ -111,6 +111,7 @@ class CountryList extends Component {
                 <th></th>
                 <th>Country</th>
                 <th>Number of Users</th>
+                <th>Average Elo</th>
               </tr>
             </thead>
             <tbody>

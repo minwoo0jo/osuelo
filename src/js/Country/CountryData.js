@@ -14,6 +14,7 @@ class CountryData extends Component {
         <td><img src={imgPath} alt={this.props.abbr}/></td>
         <td><Link to={`/users/country/${this.props.abbr}/1`}>{this.props.fullName}</Link></td>
         <td>{this.props.numUsers}</td>
+        <td>{this.props.averageElo.toFixed(1)}</td>
       </tr>
     );
   }
