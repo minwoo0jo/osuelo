@@ -2,17 +2,20 @@
 	margin-left: 20px;
 	margin-top: 20px;
 	text-align: left;
+	width: fit-content;
 }
 .UserMain {
-	width: 90%;
+	margin-left: 20px;
+	width: fit-content;
 }
 
 .UserSideBar {
-    width: 15%;
+	background-color: black;
+    width: fit-content;
     height: 30vh;
     position: sticky;
 	top: 20px;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 .card-body {
 	text-align: center;

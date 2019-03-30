@@ -50,63 +50,66 @@ class User extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(this.state.pageData !== undefined &&
-      (newProps.location.id !== undefined || newProps.location.name !== undefined)) {
-      if(newProps.location.id !== undefined && this.state.userId !== newProps.location.id) {
-        let endpoint = url.api + 'users/'
-        endpoint += 'id/' + newProps.location.id
-        axios.get(endpoint).then((response) => {
-          if(response.data.length === 0)
+    if(this.state.pageData !== undefined && newProps.location.pathname !== undefined) {
+      this.setState({pageData: undefined})
+      window.scrollTo(0, 0)
+      if(newProps.location.id !== undefined || newProps.location.name !== undefined) {
+        if(newProps.location.id !== undefined && this.state.userId !== newProps.location.id) {
+          let endpoint = url.api + 'users/'
+          endpoint += 'id/' + newProps.location.id
+          axios.get(endpoint).then((response) => {
+            if(response.data.length === 0)
+              this.setState({pageData: null, userId: newProps.location.id})
+            else
+              this.setState({pageData: response.data, userId: newProps.location.id})
+          }).catch((error) => {
+            console.log(error)
             this.setState({pageData: null, userId: newProps.location.id})
-          else
-            this.setState({pageData: response.data, userId: newProps.location.id})
-        }).catch((error) => {
-          console.log(error)
-          this.setState({pageData: null, userId: newProps.location.id})
-        })
+          })
+        }
+        else if(newProps.location.name !== undefined && this.state.userName !== newProps.location.name) {
+          let endpoint = url.api + 'users/'
+          endpoint += newProps.location.name
+          axios.get(endpoint).then((response) => {
+            if(response.data.length === 0)
+              this.setState({pageData: null, userName: newProps.location.Name})
+            else
+              this.setState({pageData: response.data, userName: newProps.location.name})
+          }).catch((error) => {
+            console.log(error)
+            this.setState({pageData: null, userName: newProps.location.name})
+          })
+        }
       }
-      else if(newProps.location.name !== undefined && this.state.userName !== newProps.location.name) {
-        let endpoint = url.api + 'users/'
-        endpoint += newProps.location.name
+      else if(newProps.location.pathname !== undefined &&
+        newProps.location.pathname !== ('/users/id/' + this.state.userId)) {
+        let id = parseInt(newProps.location.pathname.substring(10))
+        let endpoint = url.api + newProps.location.pathname
         axios.get(endpoint).then((response) => {
           if(response.data.length === 0)
-            this.setState({pageData: null, userName: newProps.location.Name})
-          else
-            this.setState({pageData: response.data, userName: newProps.location.name})
+            this.setState({pageData: null, userName: undefined, userId: id})
+          else 
+            this.setState({pageData: response.data, userName: undefined, userId: id})
         }).catch((error) => {
           console.log(error)
-          this.setState({pageData: null, userName: newProps.location.name})
+          this.setState({pageData: null, userName: undefined, userId: id})
         })
       }
-    }
-    else if(this.state.pageData !== undefined && newProps.location.pathname !== undefined &&
-      newProps.location.pathname !== ('/users/id/' + this.state.userId)) {
-      let id = parseInt(newProps.location.pathname.substring(10))
-      let endpoint = url.api + newProps.location.pathname
-      axios.get(endpoint).then((response) => {
-        if(response.data.length === 0)
-          this.setState({pageData: null, userName: undefined, userId: id})
-        else 
-          this.setState({pageData: response.data, userName: undefined, userId: id})
-      }).catch((error) => {
-        console.log(error)
-        this.setState({pageData: null, userName: undefined, userId: id})
-      })
-    }
-    else if(this.state.pageData !== undefined && newProps.location.pathname !== ('/users/' + this.state.userName)) {
-      let name = newProps.location.pathname.substring(7)
-      if(name.charAt(name.length) === '/')
-        name = name.substring(0, name.length - 1)
-      let endpoint = url.api + newProps.location.pathname
-      axios.get(endpoint).then((response) => {
-        if(response.data.length === 0)
+      else if(newProps.location.pathname !== ('/users/' + this.state.userName)) {
+        let name = newProps.location.pathname.substring(7)
+        if(name.charAt(name.length) === '/')
+          name = name.substring(0, name.length - 1)
+        let endpoint = url.api + newProps.location.pathname
+        axios.get(endpoint).then((response) => {
+          if(response.data.length === 0)
+            this.setState({pageData: null, userName: name, userId: undefined})
+          else 
+            this.setState({pageData: response.data, userName: name, userId: undefined})
+        }).catch((error) => {
+          console.log(error)
           this.setState({pageData: null, userName: name, userId: undefined})
-        else 
-          this.setState({pageData: response.data, userName: name, userId: undefined})
-      }).catch((error) => {
-        console.log(error)
-        this.setState({pageData: null, userName: name, userId: undefined})
-      })
+        })
+      }
     }
   }
 
@@ -130,7 +133,6 @@ class User extends Component {
         <h6>{name}</h6>
       )
     })
-
     const name = this.state.pageData.user.userName.startsWith('@RU') ? 'Restricted User' : this.state.pageData.user.userName
 
     const oldId = this.state.pageData.oldId !== 0 ? <>User Id: {this.state.pageData.oldId}</> : <></>
@@ -151,52 +153,51 @@ class User extends Component {
         <MatchData {...userDataObject} from={'user'}/>
       );
     })
+
     return (
       <div className="User">
         <div>
           <div className="Wrapper">
-          <div className="UserSideBar">
-            <div className="card" style={{width: '10rem'}}>
-              <img className="card-img-top" src={'https://a.ppy.sh/' + this.state.pageData.user.userId + '_1552467424.jpeg'} alt="Profile"/>
-              <div className="card-body">
-                <h4 onMouseOver ={this.handleMouseIn} onMouseOut={this.handleMouseOut} className="card-text">{name}</h4>
+            <div className="UserSideBar">
+              <div className="card" style={{width: '13.5rem'}}>
+                <img className="card-img-top" src={'https://a.ppy.sh/' + this.state.pageData.user.userId + '_1552467424.jpeg'} alt="Profile"/>
+                <div className="card-body">
+                  <h4 onMouseOver ={this.handleMouseIn} onMouseOut={this.handleMouseOut} className="card-text">{name}</h4>
+                </div>
+              </div>
+              <div style={hoverStyle}>
+                <h6>{this.state.pageData.pastNames.length > 0 ? 'Also known as:' : ''}</h6>
+                {pastNames}
+                {oldId}
               </div>
             </div>
-            <div style={hoverStyle}>
-              <h6>{this.state.pageData.pastNames.length > 0 ? 'Also known as:' : ''}</h6>
-              {pastNames}
-              {oldId}
-            </div>
-          </div>
-          <div className="UserMain">
-          <table>
-            <thead>
-              <tr>
-                <th>User Id</th>
-                <th>Username</th>
-                <th>Rank</th>
-                <th>Elo</th>
-                <th>Peak Elo</th>
-                <th>Matches Played</th>
-                <th>Matches Won</th>
-                <th>Matches Lost</th>
-                <th>Win Rate</th>
-              </tr>
-            </thead>
-            <tbody>
-              {userDataComponent}
-            </tbody>
-          </table>
-          <br />
-          {this.state.pageData.user.numMatches > 0 ?
-          <EloHistory
-            eloHistory={this.state.pageData.eloHistory}
-            peakElo={this.state.pageData.peakElo}
-            elo={this.state.pageData.user.elo}/> : <></>}
-          </div>
-          </div>
-          <br /><br /><br /><br />
-          <h2>Tournaments Played</h2>
+            <div className="UserMain">
+            <table>
+              <thead>
+                <tr>
+                  <th>User Id</th>
+                  <th>Username</th>
+                  <th>Rank (Country)</th>
+                  <th>Elo</th>
+                  <th>Peak Elo</th>
+                  <th>Matches Played</th>
+                  <th>Matches Won</th>
+                  <th>Matches Lost</th>
+                  <th>Win Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userDataComponent}
+              </tbody>
+            </table>
+            <br />
+            {this.state.pageData.user.numMatches > 0 ?
+            <EloHistory
+              eloHistory={this.state.pageData.eloHistory}
+              peakElo={this.state.pageData.peakElo}
+              elo={this.state.pageData.user.elo}/> : <></>}
+          <br /><br />
+          <h2 className="card-body">Tournaments Played</h2>
           <table>
             <thead>
               <tr>
@@ -208,7 +209,9 @@ class User extends Component {
               {userTournamentDataComponents}
             </tbody>
           </table>
-          <h2>Matches Played</h2>
+          </div>
+          </div>
+          <h2 className="card-body">Matches Played</h2>
           <table>
             <thead>
               <tr>

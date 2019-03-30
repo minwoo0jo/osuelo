@@ -96,12 +96,12 @@ class UserList extends Component {
       )
     const userDataComponents = this.state.pageData[1].map(userDataObject => {
       return (
-        <UserData {...userDataObject} detailed={false} />
+        <UserData {...userDataObject} detailed={false} countryList={this.state.country !== 'Global'} />
       )
     })
 
     return (
-      <div className="User">
+      <div className="List">
         <div>
           <h2>{this.state.country} User Elo Ranking</h2>
           <p>Page {this.state.pageNum}</p>

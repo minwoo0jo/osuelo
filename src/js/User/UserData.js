@@ -15,7 +15,7 @@ class UserData extends Component {
     if(this.props.detailed === false)
       return (
         <tr>
-          <td>{this.props.rank}</td>
+          <td>{this.props.countryList ? this.props.countryRank : this.props.rank}</td>
           <td>
             <Link to={{pathname: `/users/country/${this.props.country}/1`, page: 1, country: this.props.country}}>
               <img src={imgPath} alt={this.props.country}/>
@@ -35,7 +35,7 @@ class UserData extends Component {
             <img src={imgPath} alt={this.props.country}/>
           </Link>{' '}
           <a href={'https://osu.ppy.sh/u/' + id}>{name}</a></td>
-        <td><Link to={`/users/page/${Math.ceil(this.props.rank * 1.0 / 50)}`}>{this.props.rank}</Link></td>
+        <td><Link to={`/users/page/${Math.ceil(this.props.rank * 1.0 / 50)}`}>{this.props.rank}</Link> {this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : ''}</td>
         <td>{this.props.elo.toFixed(1)}</td>
         <td>{this.props.peak.toFixed(1)}</td>
         <td>{this.props.numMatches}</td>

@@ -4,7 +4,9 @@ import '../../../node_modules/react-linechart/dist/styles.css';
 
 class EloHistory extends Component {
     handleHover(point) {
-        console.log(point)
+        return (
+            "Elo Rating: " + point.y + " Match: " + point.x
+        )
     }
 
   render() {
@@ -17,7 +19,7 @@ class EloHistory extends Component {
             bottom = this.props.eloHistory[i]
         points.push({x: i, y: this.props.eloHistory[i].toFixed(0)})
     }
-    points.push({x: this.props.eloHistory.length, y: this.props.elo})
+    points.push({x: this.props.eloHistory.length, y: this.props.elo.toFixed(0)})
     const data = [
         {									
             color: "orange", 
@@ -33,10 +35,10 @@ class EloHistory extends Component {
                     width={600}
                     height={300}
                     xLabel={"Match"}
-                    yLabel={"Elo"}
+                    yLabel={""}
                     yMin={bottom.toFixed(0) - 50}
                     yMax={peak.toFixed(0)}
-                    onPointHover={(event, point) => this.handleHover(event)}
+                    onPointHover={this.handleHover}
                     data={data}
                 />
             </div>				
