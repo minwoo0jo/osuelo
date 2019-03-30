@@ -11,7 +11,7 @@ class Navigation extends Component {
             <Navbar bg="light" expand="sm">
                 <Navbar.Brand>
                     <Link to="/">
-                        osu! Tournament Elo System
+                        <img width="50" height="50" src={require('../../resources/images/logo.png')} alt="logo"/>
                     </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
