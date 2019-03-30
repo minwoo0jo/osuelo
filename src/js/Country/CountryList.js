@@ -93,7 +93,7 @@ class CountryList extends Component {
     })
 
     return (
-      <div className="User">
+      <div className="List">
         <div>
           <h2>Country Listing</h2>
           <p>Page {this.state.pageNum}</p>

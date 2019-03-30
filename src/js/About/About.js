@@ -8,7 +8,7 @@ class About extends Component {
             <div className="Wrapper">
                 <div className="Main">
                     <div className="AboutBody">
-                        <h1>About Elo</h1>
+                        <h1>About</h1>
                         <hr/>
                         <div className="AboutTopic">
                             <h3>What is elo?</h3>
