@@ -70,18 +70,18 @@ class Navigation extends Component {
                     <Form inline onSubmit={this.handleSubmit}>
                         <Nav>
                             <NavDropdown title={this.state.search} id="basic-nav-dropdown" className="mr-auto">
-                                <NavDropdown.Item>
-                                    <NavItem onClick={(e) => this.handleSetting(e, 'Search All')}>
+                                <NavDropdown.Item onClick={(e) => this.handleSetting(e, 'Search All')}>
+                                    <NavItem>
                                         Search All
                                     </NavItem>
                                 </NavDropdown.Item>
-                                <NavDropdown.Item>
-                                    <NavItem onClick={(e) => this.handleSetting(e, 'Search Tournaments')}>
+                                <NavDropdown.Item onClick={(e) => this.handleSetting(e, 'Search Tournaments')}>
+                                    <NavItem>
                                         Search Tournaments
                                     </NavItem>
                                 </NavDropdown.Item>
-                                <NavDropdown.Item>
-                                    <NavItem onClick={(e) => this.handleSetting(e, 'Search Users')}>
+                                <NavDropdown.Item onClick={(e) => this.handleSetting(e, 'Search Users')}>
+                                    <NavItem>
                                         Search Users
                                     </NavItem>
                                 </NavDropdown.Item>
