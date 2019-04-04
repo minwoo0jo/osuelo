@@ -1,9 +1,40 @@
 import React, {Component} from 'react'
 import {Navbar, Nav, NavItem, Button, Form, FormControl, NavDropdown} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 
 class Navigation extends Component {
+    constructor(props) {
+        super(props)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSetting = this.handleSetting.bind(this)
+        this.handleRedirect = this.handleRedirect.bind(this)
+        this.state = {
+            redirect: false,
+            path: undefined,
+            search: 'Search All',
+            value: ''
+        }
+    }
+    handleChange(e) {
+        this.setState({value: e.target.value})
+    }
+    handleSetting(e, search) {
+        this.setState({search: search})
+    }
+    handleSubmit(e) {
+        e.preventDefault()
+        var type = ''
+        if(this.state.search === 'Search Users')
+            type = '&t=u'
+        else if(this.state.search === 'Search Tournaments')
+            type = '&t=t'
+        this.props.history.push('/search?q=' + this.state.value + type)
+    }
+    handleRedirect(e, path) {
+        this.props.history.push(path)
+    }
 
   render () {
     return (
@@ -23,10 +54,10 @@ class Navigation extends Component {
                             </Link>
                         </Navbar.Text>
                         <NavDropdown title="Rankings" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/users">
-                                <NavItem>Global Elo Ranking</NavItem>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="/users/country/page/1">
+                                <NavDropdown.Item onClick={(e) => this.handleRedirect(e, '/users')}>
+                                    <NavItem>Global Elo Ranking</NavItem>
+                                </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => this.handleRedirect(e, '/users/country/page/1')}>
                                 <NavItem>Country Ranking</NavItem>
                             </NavDropdown.Item>
                         </NavDropdown>
@@ -36,9 +67,28 @@ class Navigation extends Component {
                             </Link>
                         </Navbar.Text>
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search not done" />
-                        <Button variant="outline-success">Search</Button>
+                    <Form inline onSubmit={this.handleSubmit}>
+                        <Nav>
+                            <NavDropdown title={this.state.search} id="basic-nav-dropdown" className="mr-auto">
+                                <NavDropdown.Item>
+                                    <NavItem onClick={(e) => this.handleSetting(e, 'Search All')}>
+                                        Search All
+                                    </NavItem>
+                                </NavDropdown.Item>
+                                <NavDropdown.Item>
+                                    <NavItem onClick={(e) => this.handleSetting(e, 'Search Tournaments')}>
+                                        Search Tournaments
+                                    </NavItem>
+                                </NavDropdown.Item>
+                                <NavDropdown.Item>
+                                    <NavItem onClick={(e) => this.handleSetting(e, 'Search Users')}>
+                                        Search Users
+                                    </NavItem>
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                        <FormControl type="text" placeholder="Search" onChange={this.handleChange} />
+                        <Button variant="outline-success" type="submit">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
@@ -47,5 +97,5 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default withRouter(Navigation);
 

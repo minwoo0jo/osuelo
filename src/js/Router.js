@@ -8,6 +8,7 @@ import CountryList from './Country/CountryList.js';
 import NotFound from './NotFound.js';
 import About from './About/About.js';
 import Home from './Home/Home.js';
+import Search from './Search/Search.js';
 
 class Router extends Component {
 
@@ -28,6 +29,7 @@ class Router extends Component {
           <Route path="/users/id/:id" component={User} />
           <Route path="/users/:name" component={User} />
           <Route path="/about" component={About} />
+          <Route path="/search" component={Search} />
           <Route component={NotFound} status={404} />
         </Switch>
     );

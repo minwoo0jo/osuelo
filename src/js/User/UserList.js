@@ -114,7 +114,7 @@ class UserList extends Component {
               country={this.state.country}
             />
           </div>
-          <table className>
+          <table>
             <thead>
               <tr>
                 <th>Rank</th>
