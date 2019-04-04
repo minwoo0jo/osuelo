@@ -61,9 +61,16 @@ class Navigation extends Component {
                                 <NavItem>Country Ranking</NavItem>
                             </NavDropdown.Item>
                         </NavDropdown>
+                        &nbsp;
                         <Navbar.Text>
                             <Link to="/about">
                                 <NavItem>About</NavItem>
+                            </Link>
+                        </Navbar.Text>
+                        &nbsp;
+                        <Navbar.Text>
+                            <Link to="/submit">
+                                <NavItem>Submit</NavItem>
                             </Link>
                         </Navbar.Text>
                     </Nav>

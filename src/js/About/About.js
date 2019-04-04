@@ -53,7 +53,7 @@ class About extends Component {
                     <br/>
                     <Link role='button' className='btn btn-secondary btn-lg btn-block' to={`/tournaments`}>Full Tournament Listing</Link>
                     <br/>
-                    <Link role='button' className='btn btn-secondary btn-lg btn-block' to={`/about`}>About Page</Link>
+                    <Link role='button' className='btn btn-secondary btn-lg btn-block' to={`/`}>Home Page</Link>
                 </div>
             </div>
         </div>

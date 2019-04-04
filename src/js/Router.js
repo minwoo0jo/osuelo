@@ -9,6 +9,7 @@ import NotFound from './NotFound.js';
 import About from './About/About.js';
 import Home from './Home/Home.js';
 import Search from './Search/Search.js';
+import Submit from './Submit/Submit.js';
 
 class Router extends Component {
 
@@ -30,6 +31,7 @@ class Router extends Component {
           <Route path="/users/:name" component={User} />
           <Route path="/about" component={About} />
           <Route path="/search" component={Search} />
+          <Route path="/submit" component={Submit} />
           <Route component={NotFound} status={404} />
         </Switch>
     );
