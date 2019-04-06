@@ -80,7 +80,7 @@ class Tournament extends Component {
         <NotFound />
       )
 
-    const tournamentDataComponents = <TournamentData {...this.state.pageData.tournament} />;
+    const tournamentDataComponents = <TournamentData {...this.state.pageData.tournament} detailed={true}/>;
 
     const userDataComponents = this.state.pageData.users.map(userDataObject => {
       return (
@@ -103,6 +103,8 @@ class Tournament extends Component {
               <tr>
                 <th>Tournament Name</th>
                 <th>Tournament Start Date</th>
+                <th>Acronym</th>
+                <th>Links</th>
               </tr>
             </thead>
             <tbody>

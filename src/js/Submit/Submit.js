@@ -10,7 +10,8 @@ class About extends Component {
             name: '',
             date: '',
             challonge: '',
-            submitted: false
+            submitted: false,
+            dateValid: false
         }
     }
     handleChange(e, field) {
@@ -18,6 +19,15 @@ class About extends Component {
             this.setState({name: e.target.value})
         }
         else if(field === 'date') {
+            var date = e.target.value.split('-')
+            if(date.length == 3 &&
+                parseInt(date[0]) > 2000 && parseInt(date[0]) < 2100 &&
+                parseInt(date[1]) > 0 && parseInt(date[1]) < 13 &&
+                parseInt(date[2]) > 0 && parseInt(date[2]) < 32 &&
+                date[0].length === 4 && date[1].length === 2 && date[2].length === 2)
+                this.setState({dateValid: true})
+            else
+                this.setState({dateValid: false})
             this.setState({date: e.target.value})
         }
         else if(field === 'challonge') {
@@ -47,17 +57,20 @@ class About extends Component {
                         <p>Must have an upper rank limit of 1000 or higher (no rank 5k-10k tournaments)</p>
                         <hr/>
                         <form>
-                            <div style={{display: this.state.submitted&&this.state.name === '' ? 'block' : 'none'}}>
+                            <div style={{color: 'red', display: this.state.submitted&&this.state.name === '' ? 'block' : 'none'}}>
                                 This field is required!
                             </div>
                             Tournament Name:<br/>
                             <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e, 'name')}/><br/><br/>
-                            <div style={{display: this.state.submitted&&this.state.date === '' ? 'block' : 'none'}}>
+                            <div style={{color: 'red', display: this.state.submitted&&this.state.date === '' ? 'block' : 'none'}}>
                                 This field is required!
+                            </div>
+                            <div style={{color: 'red', display: this.state.submitted&&!this.state.dateValid ? 'block' : 'none'}}>
+                                Invalid date format (must be yyyy-mm-dd)
                             </div>
                             Start Date:<br/>
                             <input type="text" name="date" placeholder="yyyy-mm-dd" onChange={(e) => this.handleChange(e, 'date')}/><br/><br/>
-                            <div style={{display: this.state.submitted&&this.state.challonge === '' ? 'block' : 'none'}}>
+                            <div style={{color: 'red', display: this.state.submitted&&this.state.challonge === '' ? 'block' : 'none'}}>
                                 This field is required!
                             </div>
                             Challonge:<br/>
