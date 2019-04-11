@@ -23,7 +23,7 @@ class About extends Component {
                             <hr/>
                             <p>
                                 We use only 1v1 tournaments for many reasons, with the biggest reason being that team tournaments with substitute players make it very difficult
-                                to guage skill level for players at an individual level. It is difficult to also guage how much a player in a team is "carried" in a victory
+                                to gauge skill level for players at an individual level. It is difficult to also gauge how much a player in a team is "carried" in a victory
                                 in the Elo rating system, as the system was initially designed for 1v1 matches only.
                             </p>
                             <br/><br/>
