@@ -5,6 +5,7 @@ class UserData extends Component {
   render() {
     const name = this.props.userName.startsWith('@RU') ? 'Restricted User' : this.props.userName
     const id = this.props.oldId === 0 ? this.props.userId : this.props.oldId
+    const rank = this.props.placed === true ? this.props.rank : 'Unplaced'
     var imgPath = undefined
     try {
       imgPath = require('../../resources/images/country/' + this.props.country + '.gif')
@@ -15,7 +16,7 @@ class UserData extends Component {
     if(this.props.detailed === false)
       return (
         <tr>
-          <td>{this.props.countryList ? this.props.countryRank : this.props.rank}</td>
+          <td>{this.props.countryList ? this.props.countryRank : rank}</td>
           <td>
             <Link to={{pathname: `/users/country/${this.props.country}/1`, page: 1, country: this.props.country}}>
               <img src={imgPath} alt={this.props.country}/>
@@ -27,6 +28,7 @@ class UserData extends Component {
           <td>{this.props.numMatches}</td>
         </tr>
       )
+    const rankLink = <><Link to={`/users/page/${Math.ceil(this.props.rank * 1.0 / 50)}`}>{this.props.rank}</Link> {this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : ''}</>
     return (
       <tr>
         <td>{this.props.userId}</td>
@@ -35,7 +37,7 @@ class UserData extends Component {
             <img src={imgPath} alt={this.props.country}/>
           </Link>{' '}
           <a href={'https://osu.ppy.sh/u/' + id} target="_blank" rel="noreferrer noopener">{name}</a></td>
-        <td><Link to={`/users/page/${Math.ceil(this.props.rank * 1.0 / 50)}`}>{this.props.rank}</Link> {this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : ''}</td>
+        <td>{rank !== 'Unplaced' ? rankLink : rank}</td>
         <td>{this.props.elo.toFixed(1)}</td>
         <td>{this.props.peak.toFixed(1)}</td>
         <td>{this.props.numMatches}</td>

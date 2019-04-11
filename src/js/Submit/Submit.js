@@ -127,10 +127,8 @@ class About extends Component {
                 forum: this.state.forum
             }
             let url = api.api + 'tournaments/challonge'
-            console.log(JSON.parse(JSON.stringify(json)))
             if(this.state.forceOverride)
                 url = url + '?o=true'
-            console.log(url)
             axios.post(url, [JSON.parse(JSON.stringify(json))]).then((response) => {
                 if(response.data[1].length > 1) {
                     let invalid = []
