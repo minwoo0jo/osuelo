@@ -20,3 +20,9 @@
 .card-body {
 	text-align: center;
 }
+.img-aspect {
+	width: auto;
+	height: auto;
+	max-width: 13.5rem;
+	max-height: 13.5rem;
+}

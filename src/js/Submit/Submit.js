@@ -298,6 +298,7 @@ class About extends Component {
                         <p>Must be strict 1v1 (No lobby style)</p>
                         <p>Must be badged</p>
                         <p>Must have an upper rank limit of 1000 or higher (no rank 5k-10k tournaments)</p>
+                        <p>Must be completed and the badge must have already been awarded</p>
                         <hr/>
                         <form>
                             <div style={{display: this.state.success ? 'block' : 'none'}}>
