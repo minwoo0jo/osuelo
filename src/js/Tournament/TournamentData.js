@@ -11,10 +11,16 @@ class TournamentData extends Component {
           imgChallonge = ''
       }
       var imgOsu = undefined
-      try {
-          imgOsu = require('../../resources/images/osu.ico')
-      } catch {
-          imgOsu = ''
+      if(this.props.forum.includes('docs.google.com/document'))
+        imgOsu = 'https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png'
+      else if(this.props.forum.includes('docs.google.com/spreadsheets'))
+        imgOsu = 'https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x16.png'
+      else {
+        try {
+            imgOsu = require('../../resources/images/osu.ico')
+        } catch {
+            imgOsu = ''
+        }
       }
       const challonge = (this.props.challonge !== undefined && this.props.challonge.length > 0)
         ? <a href={this.props.challonge} target="_blank" rel="noreferrer noopener"><img width="25" height="25" src={imgChallonge} alt="Challonge" /></a> : <></>
