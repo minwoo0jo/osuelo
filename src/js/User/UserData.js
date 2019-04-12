@@ -37,7 +37,10 @@ class UserData extends Component {
             <img src={imgPath} alt={this.props.country}/>
           </Link>{' '}
           <a href={'https://osu.ppy.sh/u/' + id} target="_blank" rel="noreferrer noopener">{name}</a></td>
-        <td>{rank !== 'Unplaced' ? rankLink : rank}</td>
+        <td>
+          {rank !== 'Unplaced' ? rankLink : rank}&nbsp;
+          {rank !== 'Unplaced' ? '' : (this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : '')}
+        </td>
         <td>{this.props.elo.toFixed(1)}</td>
         <td>{this.props.peak.toFixed(1)}</td>
         <td>{this.props.numMatches}</td>
