@@ -160,7 +160,9 @@ class User extends Component {
           <div className="Wrapper">
             <div className="UserSideBar">
               <div className="card">
-                <img className="card-img-top img-aspect" src={'https://a.ppy.sh/' + this.state.pageData.user.userId + '_1552467424.jpeg'} alt="Profile"/>
+                <div className="img-holder">
+                  <img className="card-img-top img-aspect" src={'https://a.ppy.sh/' + this.state.pageData.user.userId + '_1552467424.jpeg'} alt="Profile"/>
+                </div>
                 <div className="card-body">
                   <h4 onMouseOver ={this.handleMouseIn} onMouseOut={this.handleMouseOut} className="card-text">{name}</h4>
                 </div>

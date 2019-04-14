@@ -21,8 +21,15 @@
 	text-align: center;
 }
 .img-aspect {
+	margin: auto;
 	width: auto;
 	height: auto;
 	max-width: 13.5rem;
 	max-height: 13.5rem;
+}
+.img-holder {
+	display: flex;
+	justify-content: center;
+	width: 13.5rem;
+	height: 13.5rem;
 }

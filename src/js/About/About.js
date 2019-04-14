@@ -35,6 +35,9 @@ class About extends Component {
                                 <br/> where K is 40 until 30 matches played and 20 afterwards, and E is calculated with this formula: <br/>
                                 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/51346e1c65f857c0025647173ae48ddac904adcb" alt="Expected Elo Rating Calculation"/>
                                 <br/> The specifics of the math involved can be found in the <a href="https://en.wikipedia.org/wiki/Elo_rating_system">wikipedia page.</a>
+                                The only adjustment I've made to the formula is to halve the K value when playing against an unplaced opponent (less than 10 matches played).
+                                <br/> It should be less punishing to lose against a top player who simply plays very few 1v1 tournaments in favor of team tournaments, and
+                                beating new players who might deserve a much lower elo than the starting elo should not overinflate the elo ratings of the people who beat them.
                             </p>
                             <br/><br/>
                             <h3>Why is player x higher than player y?</h3>
