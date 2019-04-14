@@ -261,17 +261,23 @@ class Submit extends Component {
     }
   render() {
     const nameMap = this.state.names.map(name => {
+        let pad = ' '
+        for(let i = name.length; i < 17; i++)
+            pad += ' '
         return (
             <>
-            {name}:
+            {name + pad}:
             <input value={this.state.mapping[name] === undefined ? "" : this.state.mapping[name]} type="text" name="{name}" placeholder="Current name" onChange={(e) => this.handleChange(e, 'mapping ' + name)}/><br/>
             </>
         )
     })
     const unlikelyMap = this.state.unlikely.map(name => {
+        let pad = ' '
+        for(let i = name.length; i < 17; i++)
+            pad += ' '
         return (
             <>
-            {name}:
+            {name + pad}:
             <input value={this.state.mapping[name] === undefined ? "" : this.state.mapping[name]} type="text" name={name} placeholder="Current name" onChange={(e) => this.handleChange(e, 'mapping ' + name)} disabled={this.state.unlikelyCheck[name]}/>
             &nbsp;<input type="checkbox" name={name + " correct"} value="This name is correct" onChange={(e) => this.handleChange(e, 'check ' + name)}/><br/>
             </>
