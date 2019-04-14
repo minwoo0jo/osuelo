@@ -76,7 +76,7 @@ class Navigation extends Component {
                     </Nav>
                     <Form inline onSubmit={this.handleSubmit}>
                         <Nav>
-                            <NavDropdown title={this.state.search} id="basic-nav-dropdown" className="mr-auto">
+                            <NavDropdown title={this.state.search} id="basic-nav-dropdown" className="mr-auto shrink">
                                 <NavDropdown.Item onClick={(e) => this.handleSetting(e, 'Search All')}>
                                     <NavItem>
                                         Search All
