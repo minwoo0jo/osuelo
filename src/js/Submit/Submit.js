@@ -330,10 +330,12 @@ class About extends Component {
                             <input value={this.state.forum} disabled={this.state.initNames !== undefined || this.state.submitted} type="text" name="forum" placeholder="forum post link" onChange={(e) => this.handleChange(e, 'forum')} /><br/><br/>
                             <div style={{color: 'red', display: this.state.names.length > 0 ? 'block' : 'none'}}>
                                 Invalid Names Found: Please fill in the current names for these players.
+                                <br/> If the player is currently restricted, fill in @R followed by the userId (ex: @R12345)
                             </div>
                             {nameMap}<br/>
                             <div style={{color: 'red', display: this.state.unlikely.length ? 'block' : 'none'}}>
                                 These names are highly unlikely to be the current names. Please fill in the current names for these players. If you are sure that the names below are accurate, simply check the box next to it.
+                                <br/> If the player is currently restricted, fill in @R followed by the userId (ex: @R12345)
                             </div>
                             {unlikelyMap}<br/>
                             {this.state.testing? disableButton : button}
