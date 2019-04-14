@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import api from '../../resources/config.json'
 
-class About extends Component {
+class Submit extends Component {
     constructor(props) {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -355,4 +355,4 @@ class About extends Component {
   }
 }
 
-export default About;
+export default Submit;

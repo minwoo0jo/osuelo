@@ -24,12 +24,12 @@
 	margin: auto;
 	width: auto;
 	height: auto;
-	max-width: 13.5rem;
-	max-height: 13.5rem;
+	max-width: 256px;
+	max-height: 256px;
 }
 .img-holder {
 	display: flex;
 	justify-content: center;
-	width: 13.5rem;
-	height: 13.5rem;
+	width: 256px;
+	height: 256px;
 }
