@@ -26,7 +26,8 @@ class Submit extends Component {
             nameValid: false,
             forceOverride: false,
             success: false,
-            error: false
+            error: false,
+            validInput: false
         }
     }
     handleChange(e, field) {
@@ -173,7 +174,14 @@ class Submit extends Component {
                         unlikelyCheck = this.state.unlikelyCheck
                     if(offset > 0)
                         offset -= invalid.length + unlikely.length
-                    if(this.state.initNames === undefined && this.state.initUnlikely === undefined)
+                    if(invalid.length + unlikely.length === 0) {
+                        this.setState({
+                            testing: false,
+                            error: true,
+                            validInput: true
+                        })
+                    }
+                    else if(this.state.initNames === undefined && this.state.initUnlikely === undefined)
                         this.setState({
                             names: invalid,
                             unlikely: unlikely,
@@ -181,7 +189,8 @@ class Submit extends Component {
                             initNames: invalid,
                             initUnlikely: unlikely,
                             offset: offset,
-                            testing: false
+                            testing: false,
+                            validInput: false
                         })
                     else
                         this.setState({
@@ -189,7 +198,8 @@ class Submit extends Component {
                             unlikely: unlikely,
                             unlikelyCheck: unlikelyCheck,
                             offset: offset,
-                            testing: false
+                            testing: false,
+                            validInput: false
                         })
                 }
                 else if(response.data[0].length > 1) {
@@ -211,7 +221,8 @@ class Submit extends Component {
                         nameValid: false,
                         success: true,
                         forceOverride: false,
-                        error: false
+                        error: false,
+                        validInput: false
                     })
                 }
                 else {
@@ -233,7 +244,8 @@ class Submit extends Component {
                         nameValid: false,
                         success: false,
                         forceOverride: false,
-                        error: true
+                        error: true,
+                        validInput: false
                     })
                 }
             }).catch((error) => {
@@ -254,7 +266,8 @@ class Submit extends Component {
                     nameValid: false,
                     success: false,
                     forceOverride: false,
-                    error: true
+                    error: true,
+                    validInput: false
                 })
             })
         }
@@ -313,6 +326,9 @@ class Submit extends Component {
                             </div>
                             <div style={{color: 'red', display: this.state.error ? 'block' : 'none'}}>
                                 ERROR: Something went wrong. Please try again later.
+                                <div style={{color: 'red', display: this.state.validInput ? 'block' : 'none'}}>
+                                    Most likely failed to parse the challonge link.
+                                </div>
                             </div>
                             <div style={{color: 'red', display: this.state.submitted&&this.state.name === '' ? 'block' : 'none'}}>
                                 This field is required!
