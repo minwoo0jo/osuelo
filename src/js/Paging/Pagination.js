@@ -32,7 +32,7 @@ class Pagination extends Component {
         if(this.state.current > 1)
             return (
                 <>
-                    <Link to={{pathname: `${this.state.destination}1`, page: 1, country: this.props.country}}>&lt;&lt;</Link>
+                    <Link to={{pathname: `${this.state.destination}1`, page: 1, country: this.props.country, sort: this.props.sort}}>&lt;&lt;</Link>
                     &nbsp;&nbsp;
                 </>
             )
@@ -41,7 +41,7 @@ class Pagination extends Component {
     const fastForwardButton = () => {
         if(this.state.current !== this.state.total)
             return (
-                <Link to={{pathname: `${this.state.destination}${this.state.total}`, page: this.state.total, country: this.props.country}}>&gt;&gt;</Link>
+                <Link to={{pathname: `${this.state.destination}${this.state.total}`, page: this.state.total, country: this.props.country, sort: this.props.sort}}>&gt;&gt;</Link>
             )
         return
     }
@@ -53,7 +53,7 @@ class Pagination extends Component {
         else if(page > 0 && page <= this.state.total)
             return (
                 <>
-                    <Link to={{pathname: `${this.state.destination}${page}`, page: page, country: this.props.country}}>{page}</Link>
+                    <Link to={{pathname: `${this.state.destination}${page}`, page: page, country: this.props.country, sort: this.props.sort}}>{page}</Link>
                     &nbsp;&nbsp;
                 </>
             )

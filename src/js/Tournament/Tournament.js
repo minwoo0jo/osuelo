@@ -95,7 +95,7 @@ class Tournament extends Component {
     })
 
     return (
-      <div className="User">
+      <div className="Tournament">
         <div>
           <h2>{this.state.pageData.tournament.tournamentName}</h2>
           <table>

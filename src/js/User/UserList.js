@@ -10,6 +10,7 @@ import url from '../../resources/config.json';
 class UserList extends Component {
   constructor(props) {
     super(props)
+    this.handleSort = this.handleSort.bind(this)
     var page = null
     if(this.props.page === undefined)
       page = this.props.match.params.page
@@ -19,12 +20,33 @@ class UserList extends Component {
     var country = 'Global'
     if(this.props.match.params.country !== undefined)
       country = this.props.match.params.country
-    
+    var sort = 'rank'
+    if(this.props.sort !== undefined)
+      sort = this.props.sort
     this.state = {
       pageData: undefined,
       country: country,
-      pageNum: page
+      pageNum: page,
+      sort: sort
     }
+  }
+
+  handleSort(e, field) {
+    e.preventDefault()
+    var endpoint = url.api + 'users/'
+    if(this.state.country !== 'Global')
+      endpoint += 'country/' + this.state.country + '/'
+    else
+      endpoint += 'page/'
+    axios.get(endpoint + this.state.pageNum + '?sort=' + field).then((response) => {
+      if(response.data[1].length === 0)
+        this.setState({pageData: null, sort: field})
+      else
+        this.setState({pageData: response.data, sort: field})
+    }).catch((error) => {
+      console.log(error)
+      this.setState({pageData: null, sort: field})
+    })
   }
 
   componentDidMount () {
@@ -33,7 +55,7 @@ class UserList extends Component {
       endpoint += 'country/' + this.state.country + '/'
     else
       endpoint += 'page/'
-    axios.get(endpoint + this.state.pageNum).then((response) => {
+    axios.get(endpoint + this.state.pageNum + '?sort=' + this.state.sort).then((response) => {
       if(response.data[1].length === 0)
         this.setState({pageData: null})
       else
@@ -45,17 +67,19 @@ class UserList extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(this.state.pageData !== undefined && newProps.location.pathname !== this.props.location.pathname) {
+    if(this.state.pageData !== undefined &&
+      (newProps.location.pathname !== this.props.location.pathname ||
+      newProps.location.sort !== this.state.sort)) {
       this.setState({pageData: undefined})
       if(newProps.location.page !== undefined) {
-        axios.get(url.api + newProps.location.pathname).then((response) => {
+        axios.get(url.api + newProps.location.pathname + '?sort=' + newProps.location.sort).then((response) => {
           if(response.data[1].length === 0)
-            this.setState({pageData: null, pageNum: newProps.location.page, country: newProps.location.country})
+            this.setState({pageData: null, pageNum: newProps.location.page, country: newProps.location.country, sort: newProps.location.sort})
           else
-            this.setState({pageData: response.data, pageNum: newProps.location.page, country: newProps.location.country})
+            this.setState({pageData: response.data, pageNum: newProps.location.page, country: newProps.location.country, sort: newProps.location.sort})
         }).catch((error) => {
           console.log(error)
-          this.setState({pageData: null, pageNum: newProps.location.page, country: newProps.location.country})
+          this.setState({pageData: null, pageNum: newProps.location.page, country: newProps.location.country, sort: newProps.location.sort})
         })
       }
       else {
@@ -71,7 +95,7 @@ class UserList extends Component {
           country = path[path.length - 1]
         else if(path[path.length - 3] === 'country')
           country = path[path.length - 2]
-        axios.get(url.api + newProps.location.pathname).then((response) => {
+        axios.get(url.api + newProps.location.pathname + '?sort=' + this.state.sort).then((response) => {
           if(response.data[1].length === 0)
             this.setState({pageData: null, pageNum: page, country: country})
           else
@@ -96,7 +120,7 @@ class UserList extends Component {
       )
     const userDataComponents = this.state.pageData[1].map(userDataObject => {
       return (
-        <UserData {...userDataObject} detailed={false} countryList={this.state.country !== 'Global'} />
+        <UserData {...userDataObject} detailed={false} countryList={this.state.country !== 'Global'} sort={this.state.sort}/>
       )
     })
 
@@ -112,6 +136,7 @@ class UserList extends Component {
               pageNum={this.state.pageNum}
               count={this.state.pageData[0]}
               country={this.state.country}
+              sort={this.state.sort}
             />
           </div>
           <table>
@@ -119,9 +144,12 @@ class UserList extends Component {
               <tr>
                 <th>Rank</th>
                 <th>Player Name</th>
-                <th>Elo</th>
-                <th>Win Rate</th>
-                <th>Matches Played</th>
+                {this.state.sort === 'rank' ? <th><u>Elo</u></th> : 
+                  <th onClick={(e) => this.handleSort(e, 'rank')}>Elo</th>}
+                {this.state.sort === 'win' ? <th><u>Win Rate</u></th> : 
+                  <th onClick={(e) => this.handleSort(e, 'win')}>Win Rate</th>}
+                {this.state.sort === 'matches' ? <th><u>Matches Played</u></th> : 
+                  <th onClick={(e) => this.handleSort(e, 'matches')}>MatchesPlayed</th>}
               </tr>
             </thead>
             <tbody>
@@ -135,6 +163,7 @@ class UserList extends Component {
               pageNum={this.state.pageNum}
               count={this.state.pageData[0]}
               country={this.state.country}
+              sort={this.state.sort}
             />
           </div>
         </div>

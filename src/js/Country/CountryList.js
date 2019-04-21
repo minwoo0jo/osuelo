@@ -11,68 +11,61 @@ class CountryList extends Component {
   constructor(props) {
     super(props)
     var page = null
-    if(this.props.match.params.page === undefined)
-      page = 1
-    else
+    if(this.props.page === undefined)
       page = this.props.match.params.page
-    
+    else 
+      page = this.props.page
     this.state = {
       pageData: undefined,
-      pageNum: page,
-      total: 0
-    }
+      pageNum: page
+    } 
   }
 
   componentDidMount () {
-    var endpoint = url.api + 'users/country'
+    var endpoint = url.api + 'users/country?p=' + this.state.pageNum
     axios.get(endpoint).then((response) => {
-      if(response.data.length === 0 || response.data.length - 1 < (this.state.pageNum - 1) * 50)
+        if(response.data[1].length === 0)
+          this.setState({pageData: null})
+        else
+          this.setState({pageData: response.data})
+      }).catch((error) => {
+        console.log(error)
         this.setState({pageData: null})
-      else
-        this.setState({pageData: response.data.slice((this.state.pageNum - 1) * 50), total: response.data.length})
-      if(this.state.pageData.length > 50)
-        this.setState({pageData: this.state.pageData.slice(0, 50), total: response.data.length})
-    }).catch((error) => {
-      console.log(error)
-      this.setState({pageData: null})
-    })
+      })
   }
 
   componentWillReceiveProps(newProps) {
     if(this.state.pageData !== undefined && newProps.location.pathname !== this.props.location.pathname) {
+        this.setState({pageData: undefined})
         if(newProps.location.page !== undefined) {
-            let endpoint = url.api + 'users/country'
-            axios.get(endpoint).then((response) => {
-                if(response.data.length === 0 || response.data.length - 1 < (newProps.location.page - 1) * 50)
-                    this.setState({pageData: null, pageNum: newProps.location.page})
-                else
-                    this.setState({pageData: response.data.slice((newProps.location.page - 1) * 50), pageNum: newProps.location.page, total: response.data.length})
-                if(this.state.pageData.length > 50)
-                    this.setState({pageData: this.state.pageData.slice(0, 50), total: response.data.length})
-            }).catch((error) => {
-                console.log(error)
-                this.setState({pageData: null, pageNum: newProps.location.page})
-            })
+          axios.get(url.api + 'users/country?p=' + newProps.location.page).then((response) => {
+            if(response.data[1].length === 0)
+              this.setState({pageData: null, pageNum: newProps.location.page})
+            else
+              this.setState({pageData: response.data, pageNum: newProps.location.page})
+          }).catch((error) => {
+            console.log(error)
+            this.setState({pageData: null, pageNum: newProps.location.page})
+          })
         }
         else {
-            let path = newProps.location.pathname.split("/")
-            let page = 1
-            if(path[path.length - 2] === 'page')
-                page = parseInt(path[path.length - 1])
-            let endpoint = url.api + 'users/country'
-            axios.get(endpoint).then((response) => {
-                if(response.data.length === 0 || response.data.length - 1 < (page - 1) * 50)
-                    this.setState({pageData: null, pageNum: page})
-                else
-                    this.setState({pageData: response.data.slice((page - 1) * 50), pageNum: page, total: response.data.length})
-                if(this.state.pageData.length > 50)
-                    this.setState({pageData: this.state.pageData.slice(0, 50), total: response.data.length})
-            }).catch((error) => {
-                console.log(error)
-                this.setState({pageData: null, pageNum: page})
-            })
+          let path = newProps.location.pathname.split('/')
+          let page = undefined
+          if(path[path.length - 1] === 'country')
+            page = 1
+          else
+            page = parseInt(path[path.length - 1])
+          axios.get(url.api + 'users/country?p=' + page).then((response) => {
+            if(response.data[1].length === 0)
+              this.setState({pageData: null, pageNum: page})
+            else
+              this.setState({pageData: response.data, pageNum: page})
+          }).catch((error) => {
+            console.log(error)
+            this.setState({pageData: null, pageNum: page})
+          })
         }
-    }
+      }
   }
 
 
@@ -86,23 +79,22 @@ class CountryList extends Component {
       return (
         <NotFound />
       )
-    const countryDataComponents = this.state.pageData.map(countryDataObject => {
+    const countryDataComponents = this.state.pageData[1].map(countryDataObject => {
       return (
         <CountryData {...countryDataObject} />
       )
     })
-
     return (
       <div className="List">
         <div>
           <h2>Country Listing</h2>
           <p>Page {this.state.pageNum}</p>
           <div className="TableHeader">
-            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.total, this.state.pageNum * 50)} of {this.state.total} results.</p>
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.pageData[0], this.state.pageNum * 50)} of {this.state.pageData[0]} results.</p>
             <Pagination
                 type={'country'}
                 pageNum={this.state.pageNum}
-                count={this.state.pageData.length}
+                count={this.state.pageData[0]}
             />
           </div>
           <table>
@@ -123,7 +115,7 @@ class CountryList extends Component {
             <Pagination
                 type={'country'}
                 pageNum={this.state.pageNum}
-                count={this.state.pageData.length}
+                count={this.state.pageData[0]}
             />
           </div>
         </div>

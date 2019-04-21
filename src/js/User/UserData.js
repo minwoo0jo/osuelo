@@ -13,7 +13,11 @@ class UserData extends Component {
       console.log(error)
       imgPath = ''
     }
+    const eloBold = <b>{this.props.elo.toFixed(1)}</b>
+    const winBold = <b>{this.props.winRate.toFixed(2)}</b>
+    const matchBold = <b>{this.props.numMatches}</b>
     if(this.props.detailed === false)
+      
       return (
         <tr>
           <td>{this.props.countryList ? this.props.countryRank : rank}</td>
@@ -23,9 +27,9 @@ class UserData extends Component {
             </Link>
             {' '}
             <Link to={`/users/id/${this.props.userId}`}>{name}</Link></td>
-          <td><b>{this.props.elo.toFixed(1)}</b></td>
-          <td>{this.props.winRate.toFixed(2)}</td>
-          <td>{this.props.numMatches}</td>
+          <td>{this.props.sort === 'rank' ? eloBold : this.props.elo.toFixed(1)}</td>
+          <td>{this.props.sort === 'win' ? winBold : this.props.winRate.toFixed(2)}</td>
+          <td>{this.props.sort === 'matches' ? matchBold : this.props.numMatches}</td>
         </tr>
       )
     const rankLink = <><Link to={`/users/page/${Math.ceil(this.props.rank * 1.0 / 50)}`}>{this.props.rank}</Link> {this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : ''}</>

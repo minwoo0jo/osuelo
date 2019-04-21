@@ -22,7 +22,7 @@ class Router extends Component {
           <Route path="/tournaments/id/:id" component={Tournament} />
           <Route path="/tournaments/:name" component={Tournament} />
           <Route exact path="/users" render={(props) => <UserList {...props} page={'1'} country={null} /> } />
-          <Route exact path="/users/country" component={CountryList} />
+          <Route exact path="/users/country" render={(props) => <CountryList {...props} page={1} /> } />
           <Route exact path="/users/country/page/:page" component={CountryList}/>
           <Route exact path="/users/country/:country" render={(props) => <UserList {...props} page={1} /> } />
           <Route path="/users/country/:country/:page" component={UserList} />
