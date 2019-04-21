@@ -144,11 +144,11 @@ class UserList extends Component {
               <tr>
                 <th>Rank</th>
                 <th>Player Name</th>
-                {this.state.sort === 'rank' ? <th><u>Elo</u></th> : 
+                {this.state.sort === 'rank' ? <th>Elo&nbsp;<i className="arrow down"></i></th> : 
                   <th onClick={(e) => this.handleSort(e, 'rank')}>Elo</th>}
-                {this.state.sort === 'win' ? <th><u>Win Rate</u></th> : 
+                {this.state.sort === 'win' ? <th>Win Rate&nbsp;<i className="arrow down"></i></th> : 
                   <th onClick={(e) => this.handleSort(e, 'win')}>Win Rate</th>}
-                {this.state.sort === 'matches' ? <th><u>Matches Played</u></th> : 
+                {this.state.sort === 'matches' ? <th>Matches Played&nbsp;<i className="arrow down"></i></th> : 
                   <th onClick={(e) => this.handleSort(e, 'matches')}>MatchesPlayed</th>}
               </tr>
             </thead>
