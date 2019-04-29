@@ -149,7 +149,9 @@ class UserList extends Component {
                 {this.state.sort === 'win' ? <th>Win Rate&nbsp;<i className="arrow down"></i></th> : 
                   <th onClick={(e) => this.handleSort(e, 'win')}>Win Rate</th>}
                 {this.state.sort === 'matches' ? <th>Matches Played&nbsp;<i className="arrow down"></i></th> : 
-                  <th onClick={(e) => this.handleSort(e, 'matches')}>MatchesPlayed</th>}
+                  <th onClick={(e) => this.handleSort(e, 'matches')}>Matches Played</th>}
+                {this.state.sort === 'tournamentWin' ? <th>Tournaments Won&nbsp;<i className="arrow down"></i></th> : 
+                  <th onClick={(e) => this.handleSort(e, 'tournamentWin')}>Tournaments Won</th>}
               </tr>
             </thead>
             <tbody>

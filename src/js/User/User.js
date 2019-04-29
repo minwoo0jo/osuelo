@@ -183,9 +183,8 @@ class User extends Component {
                   <th>Elo</th>
                   <th>Peak Elo</th>
                   <th>Matches Played</th>
-                  <th>Matches Won</th>
-                  <th>Matches Lost</th>
                   <th>Win Rate</th>
+                  <th>Tournaments Won</th>
                 </tr>
               </thead>
               <tbody>

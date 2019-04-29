@@ -16,6 +16,7 @@ class UserData extends Component {
     const eloBold = <b>{this.props.elo.toFixed(1)}</b>
     const winBold = <b>{this.props.winRate.toFixed(2)}</b>
     const matchBold = <b>{this.props.numMatches}</b>
+    const tournamentBold = <b>{this.props.numTournamentWins}</b>
     if(this.props.detailed === false)
       
       return (
@@ -30,6 +31,7 @@ class UserData extends Component {
           <td>{this.props.sort === 'rank' ? eloBold : this.props.elo.toFixed(1)}</td>
           <td>{this.props.sort === 'win' ? winBold : this.props.winRate.toFixed(2)}</td>
           <td>{this.props.sort === 'matches' ? matchBold : this.props.numMatches}</td>
+          <td>{this.props.sort === 'tournamentWin' ? tournamentBold : this.props.numTournamentWins}</td>
         </tr>
       )
     const rankLink = <><Link to={`/users/page/${Math.ceil(this.props.rank * 1.0 / 50)}`}>{this.props.rank}</Link> {this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : ''}</>
@@ -48,9 +50,8 @@ class UserData extends Component {
         <td>{this.props.elo.toFixed(1)}</td>
         <td>{this.props.peak.toFixed(1)}</td>
         <td>{this.props.numMatches}</td>
-        <td>{this.props.numWins}</td>
-        <td>{this.props.numLosses}</td>
         <td>{this.props.winRate.toFixed(2)}</td>
+        <td>{this.props.numTournamentWins}</td>
       </tr>
     );
   }
