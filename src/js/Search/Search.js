@@ -109,6 +109,7 @@ class Search extends Component {
                 <th>Elo</th>
                 <th>Win Rate</th>
                 <th>Matches Played</th> 
+                <th>Tournaments Won</th>
               </tr>
             </thead>
             <tbody>
