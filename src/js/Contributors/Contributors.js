@@ -22,16 +22,16 @@ class Contributors extends Component {
                             <a href="https://osu.ppy.sh/users/4194445" target="_blank" rel="noreferrer noopener">Apraxia</a>&nbsp;&nbsp;
                             <a href="https://osu.ppy.sh/users/7068973" target="_blank" rel="noreferrer noopener">Yazzehh</a>&nbsp;&nbsp;
                             <a href="https://osu.ppy.sh/users/4384207" target="_blank" rel="noreferrer noopener">DigitalHypno</a>&nbsp;&nbsp;
-                            <a href="https://osu.ppy.sh/users/9119507" target="_blank" rel="noreferrer noopener">dada</a></p><br/>
+                            <a href="https://osu.ppy.sh/users/9119507" target="_blank" rel="noreferrer noopener">Dada</a></p><br/>
                             <h5>Data Accumulation</h5><hr/>
                             <p><a href="https://osu.ppy.sh/users/1797189" target="_blank" rel="noreferrer noopener">this1neguy</a>&nbsp;&nbsp;
                             <a href="https://osu.ppy.sh/users/4194445" target="_blank" rel="noreferrer noopener">Apraxia</a>&nbsp;&nbsp;
                             <a href="https://osu.ppy.sh/users/7068973" target="_blank" rel="noreferrer noopener">Yazzehh</a>&nbsp;&nbsp;
                             <a href="https://osu.ppy.sh/users/4384207" target="_blank" rel="noreferrer noopener">DigitalHypno</a>&nbsp;&nbsp;
-                            <a href="https://osu.ppy.sh/users/9119507" target="_blank" rel="noreferrer noopener">dada</a><br/>
+                            <a href="https://osu.ppy.sh/users/9119507" target="_blank" rel="noreferrer noopener">Dada</a><br/>
                             <a href="https://osu.ppy.sh/users/2042565" target="_blank" rel="noreferrer noopener">jms8719</a>&nbsp;&nbsp;
                             <a href="https://osu.ppy.sh/users/2042565" target="_blank" rel="noreferrer noopener">Toy</a>&nbsp;&nbsp;
-                            <a href="https://osu.ppy.sh/users/1076236" target="_blank" rel="noreferrer noopener">Toglette</a>&nbsp;&nbsp;
+                            <a href="https://osu.ppy.sh/users/1076236" target="_blank" rel="noreferrer noopener">ToGlette</a>&nbsp;&nbsp;
                             <a href="https://osu.ppy.sh/users/1206417" target="_blank" rel="noreferrer noopener">Gomo Pslvarh</a></p><br/>
                             <h5>Technical Help</h5><hr/>
                             <p><a href="https://osu.ppy.sh/users/718454" target="_blank" rel="noreferrer noopener">ThePooN</a></p><br/>
