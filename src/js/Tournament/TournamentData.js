@@ -6,7 +6,7 @@ class TournamentData extends Component {
     if(this.props.detailed === true) {
       var imgChallonge = undefined
       try {
-          imgChallonge = require('../../resources/images/challonge.ico')
+          imgChallonge = require('../../resources/images/logos/challonge.ico')
       } catch {
           imgChallonge = ''
       }
@@ -17,7 +17,7 @@ class TournamentData extends Component {
         imgOsu = 'https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_spreadsheet_x16.png'
       else {
         try {
-            imgOsu = require('../../resources/images/osu.ico')
+            imgOsu = require('../../resources/images/logos/osu.ico')
         } catch {
             imgOsu = ''
         }

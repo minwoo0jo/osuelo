@@ -10,6 +10,7 @@ import About from './About/About.js';
 import Home from './Home/Home.js';
 import Search from './Search/Search.js';
 import Submit from './Submit/Submit.js';
+import Contributors from './Contributors/Contributors.js';
 
 class Router extends Component {
 
@@ -32,6 +33,7 @@ class Router extends Component {
           <Route path="/about" component={About} />
           <Route path="/search" component={Search} />
           <Route path="/submit" component={Submit} />
+          <Route path="/contributors" component={Contributors} />
           <Route component={NotFound} status={404} />
         </Switch>
     );
