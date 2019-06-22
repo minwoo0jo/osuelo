@@ -5,6 +5,8 @@ class Pagination extends Component {
     constructor(props) {
         super(props)
         var destination = '/' + this.props.type + '/'
+        if(this.props.complete)
+            destination += 'complete/'
         if(this.props.type === "country")
             destination = '/users/country/page/'
         else {

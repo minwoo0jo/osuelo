@@ -54,11 +54,14 @@ class Navigation extends Component {
                             </Link>
                         </Navbar.Text>
                         <NavDropdown title="Rankings" id="basic-nav-dropdown">
-                                <NavDropdown.Item onClick={(e) => this.handleRedirect(e, '/users')}>
-                                    <NavItem>Global Elo Ranking</NavItem>
-                                </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => this.handleRedirect(e, '/users')}>
+                                <NavItem>Global Elo Ranking</NavItem>
+                            </NavDropdown.Item>
                             <NavDropdown.Item onClick={(e) => this.handleRedirect(e, '/users/country/page/1')}>
                                 <NavItem>Country Ranking</NavItem>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => this.handleRedirect(e, '/users/complete')}>
+                                <NavItem>Complete Unofficial Player Ranking</NavItem>
                             </NavDropdown.Item>
                         </NavDropdown>
                         &nbsp;

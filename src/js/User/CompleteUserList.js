@@ -7,7 +7,7 @@ import NotFound from '../NotFound.js';
 import Pagination from '../Paging/Pagination.js';
 import url from '../../resources/config.json';
 
-class UserList extends Component {
+class CompleteUserList extends Component {
   constructor(props) {
     super(props)
     this.handleSort = this.handleSort.bind(this)
@@ -33,7 +33,7 @@ class UserList extends Component {
 
   handleSort(e, field) {
     e.preventDefault()
-    var endpoint = url.api + 'users/'
+    var endpoint = url.api + 'users/complete/'
     if(this.state.country !== 'Global')
       endpoint += 'country/' + this.state.country + '/'
     else
@@ -54,7 +54,7 @@ class UserList extends Component {
     if(this.state.country !== 'Global')
       endpoint += 'country/' + this.state.country + '/'
     else
-      endpoint += 'page/'
+      endpoint += 'complete/page/'
     axios.get(endpoint + this.state.pageNum + '?sort=' + this.state.sort).then((response) => {
       if(response.data[1].length === 0)
         this.setState({pageData: null})
@@ -127,9 +127,10 @@ class UserList extends Component {
     return (
       <div className="List">
         <div>
-          <h2>{this.state.country} User Elo Ranking</h2>
+          <h2>Unofficial User Elo Ranking</h2>
           <p>Page {this.state.pageNum}</p>
           <div className="TableHeader">
+            <p>Keep in mind that the placement system exists for a reason, and while more complete, this list will always be less accurate.</p>
             <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.pageData[0], this.state.pageNum * 50)} of {this.state.pageData[0]} results.</p>
             <Pagination
               type={'users'}
@@ -137,6 +138,7 @@ class UserList extends Component {
               count={this.state.pageData[0]}
               country={this.state.country}
               sort={this.state.sort}
+              complete={true}
             />
           </div>
           <table>
@@ -167,6 +169,7 @@ class UserList extends Component {
               count={this.state.pageData[0]}
               country={this.state.country}
               sort={this.state.sort}
+              complete={true}
             />
           </div>
         </div>
@@ -175,4 +178,4 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+export default CompleteUserList;

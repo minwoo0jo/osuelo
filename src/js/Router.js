@@ -11,6 +11,7 @@ import Home from './Home/Home.js';
 import Search from './Search/Search.js';
 import Submit from './Submit/Submit.js';
 import Contributors from './Contributors/Contributors.js';
+import CompleteUserList from './User/CompleteUserList.js';
 
 class Router extends Component {
 
@@ -23,6 +24,8 @@ class Router extends Component {
           <Route path="/tournaments/id/:id" component={Tournament} />
           <Route path="/tournaments/:name" component={Tournament} />
           <Route exact path="/users" render={(props) => <UserList {...props} page={'1'} country={null} /> } />
+          <Route exact path="/users/complete" render={(props) => <CompleteUserList {...props} page={'1'} country={null} /> } />
+          <Route exact path="/users/complete/page/:page" component={CompleteUserList} />
           <Route exact path="/users/country" render={(props) => <CountryList {...props} page={1} /> } />
           <Route exact path="/users/country/page/:page" component={CountryList}/>
           <Route exact path="/users/country/:country" render={(props) => <UserList {...props} page={1} /> } />
