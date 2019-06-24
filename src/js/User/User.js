@@ -150,7 +150,7 @@ class User extends Component {
 
     const userMatchDataComponents = this.state.pageData.matches.map(userDataObject => {
       return (
-        <MatchData {...userDataObject} from={'user'}/>
+        <MatchData {...userDataObject} from={'user'} userId={this.state.userId}/>
       );
     })
 
@@ -213,15 +213,17 @@ class User extends Component {
           </div>
           </div>
           <h2 className="card-body">Matches Played</h2>
+          <p className="card-body">Non-international tournaments are gray and do not count for placements unless facing a ranked player</p>
           <table>
             <thead>
               <tr>
                 <th>Tournament</th>
-                <th>Elo of Player 1</th>
-                <th>Player 1 Username</th>
-                <th>Elo of Player 2</th>
-                <th>Player 2 Username</th>
+                <th>Player 1 Elo</th>
+                <th>Player 1</th>
+                <th>Player 2 Elo</th>
+                <th>Player 2</th>
                 <th>Winner</th>
+                <th>Change</th>
               </tr>
             </thead>
             <tbody>

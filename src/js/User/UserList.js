@@ -143,7 +143,7 @@ class UserList extends Component {
             <thead>
               <tr>
                 <th>Rank</th>
-                {this.state.country === 'Global' ? <></> : <th>Country Rank</th>}
+                <th>Country Rank</th>
                 <th>Player Name</th>
                 {this.state.sort === 'rank' ? <th>Elo&nbsp;<i className="arrow down"></i></th> : 
                   <th onClick={(e) => this.handleSort(e, 'rank')}>Elo</th>}

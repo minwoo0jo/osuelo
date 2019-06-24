@@ -5,7 +5,7 @@ class UserData extends Component {
   render() {
     const name = this.props.userName.startsWith('@RU') ? 'Restricted User' : this.props.userName
     const id = this.props.oldId === 0 ? this.props.userId : this.props.oldId
-    const rank = this.props.placed === true ? this.props.rank : 'Unplaced'
+    const rank = this.props.placed === true ? this.props.rank : 'Unplaced (' + this.props.numPlacements + '/10)'
     var style = this.props.userName.startsWith('@RU') ? {backgroundColor:'#ff9696', fontStyle:'normal'} : {fontStyle:'normal'}
     const styleFont = this.props.placed === true ? 'normal' : 'italic'
     style.fontStyle = styleFont
@@ -21,10 +21,10 @@ class UserData extends Component {
     const matchBold = <b>{this.props.numMatches}</b>
     const tournamentBold = <b>{this.props.numTournamentWins}</b>
     if(this.props.detailed === false) {
-      const countryRanks = <><td>{rank}</td><td>{this.props.countryRank}</td></>
+      const countryRanks = <><td>{rank}</td><td>{this.props.countryRank > 0 ? this.props.countryRank : ''}</td></>
       return (
         <tr style={style}>
-          {this.props.countryList ? countryRanks : <td>{rank}</td>}
+          {countryRanks}
           <td>
             <Link to={{pathname: `/users/country/${this.props.country}/1`, page: 1, country: this.props.country}}>
               <img src={imgPath} alt={this.props.country}/>

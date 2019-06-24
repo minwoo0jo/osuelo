@@ -145,6 +145,7 @@ class CompleteUserList extends Component {
             <thead>
               <tr>
                 <th>Rank</th>
+                <th>Country Rank</th>
                 {this.state.country === 'Global' ? <></> : <th>Country Rank</th>}
                 <th>Player Name</th>
                 {this.state.sort === 'rank' ? <th>Elo&nbsp;<i className="arrow down"></i></th> : 

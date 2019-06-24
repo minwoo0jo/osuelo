@@ -116,6 +116,7 @@ class Tournament extends Component {
             <thead>
               <tr>
                 <th>Rank</th>
+                <th>Country Rank</th>
                 <th>Player Name</th>
                 <th>Elo</th>
                 <th>Win Rate</th>
@@ -131,11 +132,10 @@ class Tournament extends Component {
           <table>
             <thead>
               <tr>
-                <th>Match Sequence</th>
-                <th>Elo of Player 1</th>
-                <th>Player 1 Username</th>
-                <th>Elo of Player 2</th>
-                <th>Player 2 Username</th>
+                <th>Player 1 Elo</th>
+                <th>Player 1</th>
+                <th>Player 2 Elo</th>
+                <th>Player 2</th>
                 <th>Winner</th>
               </tr>
             </thead>
