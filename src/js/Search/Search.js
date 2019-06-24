@@ -105,6 +105,7 @@ class Search extends Component {
             <thead>
               <tr>
                 <th>Rank</th>
+                <th>Country Rank</th>
                 <th>Player Name</th>
                 <th>Elo</th>
                 <th>Win Rate</th>
