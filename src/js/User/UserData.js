@@ -48,8 +48,8 @@ class UserData extends Component {
           </Link>{' '}
           <a href={'https://osu.ppy.sh/u/' + id} target="_blank" rel="noreferrer noopener">{name}</a></td>
         <td>
-          {rank.startsWith('Unplaced') ? rankLink : rank}&nbsp;
-          {rank.startsWith('Unplaced') ? '' : (this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : '')}
+          {!rank.startsWith('Unplaced') ? rankLink : rank}&nbsp;
+          {!rank.startsWith('Unplaced') ? '' : (this.props.countryRank > 0 ? `(${this.props.countryRank} ${this.props.country})` : '')}
         </td>
         <td title={this.props.elo}>{this.props.elo.toFixed(1)}</td>
         <td title={this.props.peak}>{this.props.peak.toFixed(1)}</td>
