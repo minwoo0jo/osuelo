@@ -14,13 +14,15 @@ class User extends Component {
     super(props)
     this.handleMouseIn = this.handleMouseIn.bind(this)
     this.handleMouseOut = this.handleMouseOut.bind(this)
+    this.handleRange = this.handleRange.bind(this)
     var id = this.props.match.params.id
     var name = this.props.match.params.name
     this.state = {
       pageData: undefined,
       userId: id,
       userName: name,
-      hover: false
+      hover: false,
+      range: [10, 50]
     }
   }
 
@@ -30,6 +32,10 @@ class User extends Component {
   
   handleMouseOut() {
     this.setState({hover: false})
+  }
+
+  handleRange(e, value) {
+
   }
 
   componentDidMount () {
@@ -196,7 +202,8 @@ class User extends Component {
             <EloHistory
               eloHistory={this.state.pageData.eloHistory}
               peakElo={this.state.pageData.peakElo}
-              elo={this.state.pageData.user.elo}/> : <></>}
+              elo={this.state.pageData.user.elo}
+              range={this.state.range}/> : <></>}
           <br /><br />
           <h2 className="card-body">Tournaments Played</h2>
           <table>
