@@ -312,6 +312,10 @@ class Submit extends Component {
                     <div className="AboutBody">
                         <h1>Missing a tournament? Submit it here!</h1>
                         <br/><br/>
+                        <h6>Note: Challonge API does not work when hosted by a free challonge community. Challonge is aware and will not fix this.</h6>
+                        <h6>Examples include: nik's Tournmaments, osu!FRlive</h6>
+                        <hr/>
+                        <br/><br/>
                         <h6>Restrictions</h6>
                         <hr/>
                         <p>Must be strict 1v1 (No lobby style)</p>
