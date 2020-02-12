@@ -25,6 +25,7 @@ class UserList extends Component {
       sort = this.props.sort
     this.state = {
       pageData: undefined,
+      rankChanges: undefined,
       country: country,
       pageNum: page,
       sort: sort
@@ -118,12 +119,32 @@ class UserList extends Component {
       return (
         <NotFound />
       )
+    var rankChanges = []
+    if(this.state.pageData[2] !== undefined && this.state.sort === 'rank')
+      for(var i = 0; i < this.state.pageData[1].length; i++) {
+        for(var j = 0; j < this.state.pageData[2].length; j++) {
+          if(this.state.pageData[1][i].userId === this.state.pageData[2][j].userId) {
+            rankChanges[i] = j - i - (50 * (this.state.pageNum - 1))
+            break
+          }
+          else if(j === this.state.pageData[2].length - 1) {
+            rankChanges[i] = 'New!'
+          }
+        }
+      }
+    console.log(this.state.pageData[2])
+    var counter = 0
     const userDataComponents = this.state.pageData[1].map(userDataObject => {
+      counter = counter + 1
       return (
-        <UserData {...userDataObject} detailed={false} countryList={this.state.country !== 'Global'} sort={this.state.sort}/>
+        <UserData {...userDataObject} detailed={false} countryList={this.state.country !== 'Global'} sort={this.state.sort} rankChange={rankChanges.length > 0 ? rankChanges[counter - 1] : undefined}/>
       )
     })
 
+    var changeHeader = <></>
+    if(this.state.sort === 'rank' && this.state.country === 'Global') {
+      changeHeader = <th>Change</th>
+    }
     return (
       <div className="List">
         <div>
@@ -142,6 +163,7 @@ class UserList extends Component {
           <table>
             <thead>
               <tr>
+                {changeHeader}
                 <th>Rank</th>
                 <th>Country Rank</th>
                 <th>Player Name</th>

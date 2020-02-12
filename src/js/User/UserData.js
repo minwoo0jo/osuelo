@@ -21,9 +21,11 @@ class UserData extends Component {
     const matchBold = <b>{this.props.numMatches}</b>
     const tournamentBold = <b>{this.props.numTournamentWins}</b>
     if(this.props.detailed === false) {
+      var rankChange = <>{this.props.rankChange >= 0 ? '+' + this.props.rankChange : this.props.rankChange}</>
       const countryRanks = <><td>{rank}</td><td>{this.props.countryRank > 0 ? this.props.countryRank : ''}</td></>
       return (
         <tr style={style}>
+          {this.props.rankChange === undefined ? <></> : <td style={{color:(this.props.rankChange > 0 ? 'green' : (this.props.rankChange < 0 ? 'red' : 'gray'))}}>{rankChange}</td>}
           {countryRanks}
           <td>
             <Link to={{pathname: `/users/country/${this.props.country}/1`, page: 1, country: this.props.country}}>

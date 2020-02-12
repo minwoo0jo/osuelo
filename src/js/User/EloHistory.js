@@ -20,18 +20,25 @@ class EloHistory extends Component {
     }
 
   render() {
+    let newValues = {min: 0, max: this.props.eloHistory.length}
+    if(this.state.value.min >= 0) {
+        newValues.min = this.state.value.min
+    }
+    if(this.state.value.max <= this.props.eloHistory.length) {
+        newValues.max = this.state.value.max
+    }
     let points = []
     let bottom = this.props.eloHistory[this.props.eloHistory.length - 1]
     let peak = this.props.peakElo + 50
-    for(var i = this.state.value.min; i < this.state.value.max; i++) {
+    for(var i = newValues.min; i < newValues.max; i++) {
         if(bottom > this.props.eloHistory[i])
             bottom = this.props.eloHistory[i]
         points.push({x: i, y: this.props.eloHistory[i].toFixed(0)})
     }
-    if(this.state.value.max === this.props.eloHistory.length)
+    if(newValues.max === this.props.eloHistory.length)
         points.push({x: this.props.eloHistory.length, y: this.props.elo.toFixed(0)})
-    else if(this.state.value.max < this.props.eloHistory.length)
-        points.push({x: this.state.value.max, y: this.props.eloHistory[this.state.value.max].toFixed(0)})
+    else if(newValues.max < this.props.eloHistory.length)
+        points.push({x: newValues.max, y: this.props.eloHistory[newValues.max].toFixed(0)})
     const data = [
         {									
             color: "orange", 
@@ -44,7 +51,7 @@ class EloHistory extends Component {
             <div className="App">
                 <p>Elo History</p>
                 <LineChart 
-                    width={450 + Math.min(10*(this.state.value.max - this.state.value.min), 450)}
+                    width={450 + Math.min(10*(newValues.max - newValues.min), 450)}
                     height={300}
                     xLabel={"Match"}
                     yLabel={""}
@@ -58,7 +65,7 @@ class EloHistory extends Component {
                     <InputRange
                         maxValue={this.props.eloHistory.length}
                         minValue={0}
-                        value={this.state.value}
+                        value={newValues}
                         onChange={value => this.setState({ value })}
                     />
                 </div>

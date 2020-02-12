@@ -111,7 +111,7 @@ class CountryList extends Component {
             </tbody>
           </table>
           <div className="TableHeader">
-            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.total, this.state.pageNum * 50)} of {this.state.total} results.</p>
+            <p>Displaying {1 + ((this.state.pageNum - 1) * 50)} to {Math.min(this.state.pageData[0], this.state.pageNum * 50)} of {this.state.pageData[0]} results.</p>
             <Pagination
                 type={'country'}
                 pageNum={this.state.pageNum}

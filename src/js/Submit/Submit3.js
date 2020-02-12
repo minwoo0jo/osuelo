@@ -9,13 +9,10 @@ class Submit extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.state = {
-            submitter: '',
             name: '',
             date: '',
             challonge: '',
             forum: '',
-            winner: '',
-            international: false,
             names: [],
             initNames: undefined,
             unlikely: [],
@@ -54,15 +51,6 @@ class Submit extends Component {
         }
         else if(field === 'forum') {
             this.setState({forum: e.target.value})
-        }
-        else if(field === 'submitter') {
-            this.setState({submitter: e.target.value})
-        }
-        else if(field === 'winner osu username') {
-            this.setState({winner: e.target.value})
-        }
-        else if(field === 'international') {
-            this.setState({international: e.target.checked})
         }
         else if(field.startsWith('check')) {
             let map = this.state.mapping
@@ -137,19 +125,12 @@ class Submit extends Component {
                 link: this.state.challonge,
                 startDate: this.state.date,
                 nameChanges: this.state.mapping,
-                forum: this.state.forum,
-                winner: this.state.winner,
-                open: this.state.international
+                forum: this.state.forum
             }
-            let json2 = {
-                challonges: [json],
-                nameChanges: this.state.mapping,
-                submitter: this.state.submitter
-            }
-            let url = api.api + 'tournaments/challonge/test'
+            let url = api.api + 'tournaments/challonge'
             if(this.state.forceOverride)
                 url = url + '?o=true'
-            axios.post(url, JSON.parse(JSON.stringify(json2))   ).then((response) => {
+            axios.post(url, [JSON.parse(JSON.stringify(json))]).then((response) => {
                 if(response.data[1].length > 1) {
                     let invalid = []
                     let unlikely = []
@@ -356,8 +337,6 @@ class Submit extends Component {
                             <div style={{color: 'red', display: this.state.submitted&&this.state.name === '' ? 'block' : 'none'}}>
                                 This field is required!
                             </div>
-                            Submitter Name (optional):<br/>
-                            <input value={this.state.submitter} disabled={this.state.initNames !== undefined || this.state.submitted} type="text" name="submitter" placeholder="your osu/discord name" onChange={(e) => this.handleChange(e, 'submitter')} /><br/><br/>
                             Tournament Name:<br/>
                             <input value={this.state.name} disabled={this.state.initNames !== undefined || this.state.submitted} type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e, 'name')}/><br/><br/>
                             <div style={{color: 'red', display: this.state.submitted&&this.state.date === '' ? 'block' : 'none'}}>
@@ -365,11 +344,6 @@ class Submit extends Component {
                             </div>
                             <div style={{color: 'red', display: this.state.submitted&&!this.state.dateValid ? 'block' : 'none'}}>
                                 Invalid date format (must be yyyy-mm-dd)
-                            </div>
-                            Tournament Winner:<br/>
-                            <input value={this.state.winner} disabled={this.state.initNames !== undefined || this.state.submitted} type="text" name="winner" placeholder="winner" onChange={(e) => this.handleChange(e, 'winner osu username')}/><br/><br/>
-                            <div style={{color: 'red', display: this.state.submitted&&this.state.winner === '' ? 'block' : 'none'}}>
-                                This field is required!
                             </div>
                             Start Date:<br/>
                             <input value={this.state.date} disabled={this.state.initNames !== undefined || this.state.submitted} type="text" name="date" placeholder="yyyy-mm-dd" onChange={(e) => this.handleChange(e, 'date')}/><br/><br/>
@@ -380,11 +354,6 @@ class Submit extends Component {
                             <input value={this.state.challonge} disabled={this.state.initNames !== undefined || this.state.submitted} type="text" name="challonge" placeholder="challonge link" onChange={(e) => this.handleChange(e, 'challonge')} /><br/><br/>
                             Forum Post (optional):<br/>
                             <input value={this.state.forum} disabled={this.state.initNames !== undefined || this.state.submitted} type="text" name="forum" placeholder="forum post link" onChange={(e) => this.handleChange(e, 'forum')} /><br/><br/>
-                            International/Non-regional:<br/>
-                            <input checked={this.state.international} disabled={this.state.initNames !== undefined || this.state.submitted} type="checkbox" name="international" onChange={(e) => this.handleChange(e, 'international')}/><br/><br/>
-                            <div style={{color: 'red', display: this.state.submitted&&this.state.international === undefined ? 'block' : 'none'}}>
-                                This field is required!
-                            </div>
                             <div style={{color: 'red', display: this.state.names.length > 0 ? 'block' : 'none'}}>
                                 Invalid Names Found: Please fill in the current names for these players.
                                 <br/> If the player is currently restricted, fill in @R followed by the userId (ex: @R12345)

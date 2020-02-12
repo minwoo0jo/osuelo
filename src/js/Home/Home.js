@@ -11,6 +11,7 @@ class Home extends Component {
               <div className="Main">
                 <h2>Welcome to the 1v1 osu! Elo System database!</h2>
                 <div className="MainBody">
+                  <hr/>
                 </div>
               </div>
               <div className="SideBar">
