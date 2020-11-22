@@ -10,7 +10,8 @@ class Home2 extends Component {
             <div className="WholePage">
                 <div className="LeftSide main-left">
                     <div className="TopSide">
-                        <h1>Welcome to osuelo.com!</h1>
+                        <h1 className="lg-view">Welcome to osuelo.com!</h1>
+                        <h1 className="sm-view">osuelo.com <img width="32px" height="32px" src={require('../../resources/images/logos/logo.png')} alt="logo" /></h1>
                         <h6>The 1v1 osu! Elo System Database</h6>
                     </div>
                     <div className="BottomSide">
