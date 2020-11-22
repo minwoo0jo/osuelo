@@ -3,6 +3,8 @@
     height: auto;
     padding-top: 20px;
     background-color: #f8f9fa;
+    max-width: 1400px;
+    margin: auto;
 }
 .TopSide {
     background-color: inherit;
@@ -19,6 +21,8 @@
     background-color: inherit;
     padding: 20px;
     margin-top: 0px;
+    max-width: 1000px;
+    margin: auto;
 }
 .RightSide {
     width: 35%;
@@ -27,6 +31,7 @@
     background-color: inherit;
     padding: 20px;
     margin-top: 0px;
+    max-width: 490px;
 }
 .top-table{
     text-align: center;
@@ -72,4 +77,15 @@
 .rank-icon {
     width: 1.7rem;
     height: 1.7rem;
+}
+@media (max-width: 1050px) {
+    .main-right{display: none;}
+    .main-left{width: 100%; text-align: center;}
+}
+@media (max-width: 600px) {
+    h1{font-size: 2rem;}
+    h4{font-size: 1rem;}
+    .RightSide{display: none;}
+    .LeftSide{width: 100%;}
+    .card-subtitle{display: none;}
 }

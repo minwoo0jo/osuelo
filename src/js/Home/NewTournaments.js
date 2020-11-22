@@ -30,11 +30,11 @@ class NewTournaments extends Component {
                     <div>
                         <div className="LeftSide" style={{paddingTop: "0px"}}>
                             <div className="card-body" style={{textAlign: "left"}}>
-                                <img className="card-img" src={require('../../resources/images/banners/osuFinnishTournament4.png')} alt="banner" />
+                                <img className="card-img" src={require('../../resources/images/banners/OFT4.png')} alt="banner" />
                             </div>
                         </div>
                         <div className="RightSide" style={{paddingTop: "0px"}}>
-                            <div className="card-body">
+                            <div className="card-body links">
                                 <h6 className="card-text">External Links</h6>
                                 <a href={"https://osu.ppy.sh/community/forums/topics/1120853"} target="_blank" rel="noreferrer noopener"><img width="50" height="50" src={imgOsu} alt="Challonge" /></a>
                                 <br/>
@@ -54,7 +54,7 @@ class NewTournaments extends Component {
                     <div>
                         <div className="LeftSide" style={{paddingTop: "0px"}}>
                             <div className="card-body" style={{textAlign: "left"}}>
-                                <img className="card-img" src={require('../../resources/images/banners/osuFrenchTournament2020.png')} alt="banner" />
+                                <img className="card-img" src={require('../../resources/images/banners/OFT2020.png')} alt="banner" />
                             </div>
                         </div>
                         <div className="RightSide" style={{paddingTop: "0px"}}>
