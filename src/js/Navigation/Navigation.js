@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Navbar, Nav, NavItem, Button, Form, FormControl, NavDropdown} from 'react-bootstrap'
 import {Link, withRouter} from 'react-router-dom'
+import '../../resources/css/App.css'
 
 
 class Navigation extends Component {
@@ -38,7 +39,7 @@ class Navigation extends Component {
 
   render () {
     return (
-        <div>
+        <div className="sticky">
             <Navbar bg="light" expand="sm">
                 <Navbar.Brand>
                     <Link to="/">
