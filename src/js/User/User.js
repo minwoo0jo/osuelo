@@ -48,7 +48,7 @@ class User extends Component {
       if(response.data.length === 0)
         this.setState({pageData: null})
       else
-        this.setState({pageData: response.data})
+        this.setState({pageData: response.data, userId: response.data.user.userId, userName: response.data.user.userName})
     }).catch((error) => {
       console.log(error)
       this.setState({pageData: null})
