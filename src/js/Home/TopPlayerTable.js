@@ -29,8 +29,8 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1654.713646766123">
-                            1654.7 Elo
+                        <td className="top-td" title="1654.8613341421674">
+                            1654.9 Elo
                         </td>
                         <td className="top-td">
                             <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;86.62%
@@ -54,8 +54,8 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1589.3166993355658">
-                            1589.3 Elo
+                        <td className="top-td" title="1590.2235156986612">
+                            1590.2 Elo
                         </td>
                         <td className="top-td">
                             <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;74.75%
@@ -79,8 +79,8 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1588.254072506157">
-                            1588.3 Elo
+                        <td className="top-td" title="1588.2167905594583">
+                            1588.2 Elo
                         </td>
                         <td className="top-td">
                             <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;80.82%
@@ -104,8 +104,8 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1534.5694661185078">
-                            1534.6 Elo
+                        <td className="top-td" title="1534.4935042660754">
+                            1534.5 Elo
                         </td>
                         <td className="top-td">
                             <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;73.33%
@@ -129,8 +129,8 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1513.8708664978474">
-                            1513.9 Elo
+                        <td className="top-td" title="1514.4594478692873">
+                            1514.5 Elo
                         </td>
                         <td className="top-td">
                             <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;75.73%
