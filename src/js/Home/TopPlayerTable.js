@@ -29,7 +29,7 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1654.8613341421674">
+                        <td className="top-td" title="1654.859291867507">
                             1654.9 Elo
                         </td>
                         <td className="top-td">
@@ -54,7 +54,7 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1590.2235156986612">
+                        <td className="top-td" title="1590.2216501292746">
                             1590.2 Elo
                         </td>
                         <td className="top-td">
@@ -79,7 +79,7 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1588.2167905594583">
+                        <td className="top-td" title="1588.2162053214329">
                             1588.2 Elo
                         </td>
                         <td className="top-td">
@@ -104,7 +104,7 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1534.4935042660754">
+                        <td className="top-td" title="1534.4926941671815">
                             1534.5 Elo
                         </td>
                         <td className="top-td">
@@ -129,7 +129,7 @@ class TopPlayerTable extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="top-td" title="1514.4594478692873">
+                        <td className="top-td" title="1514.457815236453">
                             1514.5 Elo
                         </td>
                         <td className="top-td">
