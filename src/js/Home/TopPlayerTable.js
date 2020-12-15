@@ -1,9 +1,93 @@
 import React, { Component } from 'react';
 import '../../resources/css/Home2.css';
 import { Link } from 'react-router-dom';
+import url from '../../resources/config.json';
+import axios from 'axios';
+import NotFound from '../NotFound.js';
 
 class TopPlayerTable extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            pageData: undefined,
+        }
+    }
+    componentDidMount() {
+        var endpoint = url.api + 'users/'
+        axios.get(endpoint).then((response) => {
+          if(response.data.length === 0)
+            this.setState({pageData: null})
+          else
+            this.setState({pageData: response.data[1]})
+        }).catch((error) => {
+          console.log(error)
+          this.setState({pageData: null})
+        })
+    }
     render() {
+        if(this.state.pageData === null)
+            return (
+                <NotFound/>
+            )
+        var top5 = [undefined, undefined, undefined, undefined, undefined]
+        if(this.state.pageData !== undefined)
+            for(var i = 0; i < 5; i++) {
+                if(this.state.pageData[i] !== undefined && this.state.pageData[i] !== null) {
+                    top5[i] = <>
+                    <tr>
+                        <td className="top-td top-imageholder" rowSpan="2">
+                            <img className="top-image" src={'https://a.ppy.sh/' + this.state.pageData[i].userId + '_1552467424.jpeg'} alt="Profile"/>
+                        </td>
+                        <td className="top-td top-name" colSpan="2" style={{borderBottom: "2px solid lightgray"}}>
+                            <Link to={{pathname: `/users/country/` + this.state.pageData[i].country + `/1`, page: 1, country: this.state.pageData[i].country}}>
+                                <img src={require('../../resources/images/country/' + this.state.pageData[i].country + '.gif')} alt={this.state.pageData[i].country}/>
+                            </Link>{' '}
+                            <Link to={{pathname: `/users/id/` + this.state.pageData[i].userId}}>{this.state.pageData[i].userName}</Link>
+                        </td>
+                        <td className="top-td">
+                        {i === 0 ? <img className="rank-icon" src={require('../../resources/images/logos/goldmedal.svg')} alt="Gold" title="Rank" /> : <></>}
+                        {i === 1 ? <img className="rank-icon" src={require('../../resources/images/logos/silvermedal.svg')} alt="Silver" title="Rank" /> : <></>}
+                        {i === 2 ? <img className="rank-icon" src={require('../../resources/images/logos/bronzemedal.svg')} alt="Bronze" title="Rank" /> : <></>}
+                        {i >= 3 ? <>{i + 1}<sup>th</sup></> : <></>}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="top-td" title={this.state.pageData[i].elo}>
+                            {this.state.pageData[i].elo.toFixed(1)} Elo
+                        </td>
+                        <td className="top-td">
+                            <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;{this.state.pageData[i].winRate.toFixed(2)}
+                        </td>
+                        <td className="top-td">
+                            <img className="table-icon" src={require('../../resources/images/logos/trophy.svg')} alt="Trophy" title="Tournaments Won" />&nbsp;{this.state.pageData[i].numTournamentWins}
+                        </td>
+                    </tr></>
+                }
+            }
+        else
+            top5 = <>
+                    <tr>
+                        <td className="top-td top-imageholder" rowSpan="2">
+                            <img className="top-image" src={'https://a.ppy.sh/1_1552467424.jpeg'} alt="Profile"/>
+                        </td>
+                        <td className="top-td top-name" colSpan="2" style={{borderBottom: "2px solid lightgray"}}>
+                            Loading...
+                        </td>
+                        <td className="top-td">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="top-td">
+                            Loading...
+                        </td>
+                        <td className="top-td">
+                            Loading...
+                        </td>
+                        <td className="top-td">
+                            &nbsp;
+                        </td>
+                    </tr></>
         return (
             <table className="top-table">
                 <thead>
@@ -14,131 +98,7 @@ class TopPlayerTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className="top-td top-imageholder" rowSpan="2">
-                            <img className="top-image" src={'https://a.ppy.sh/5182050_1552467424.jpeg'} alt="Profile"/>
-                        </td>
-                        <td className="top-td top-name" colSpan="2" style={{borderBottom: "2px solid lightgray"}}>
-                            <Link to={{pathname: `/users/country/GB/1`, page: 1, country: "GB"}}>
-                                <img src={require('../../resources/images/country/GB.gif')} alt="GB"/>
-                            </Link>{' '}
-                            <Link to={{pathname: `/users/id/5182050`}}>Bubbleman</Link>
-                        </td>
-                        <td className="top-td">
-                        <img className="rank-icon" src={require('../../resources/images/logos/goldmedal.svg')} alt="Gold" title="Rank" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td" title="1654.859291867507">
-                            1654.9 Elo
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;86.62%
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/trophy.svg')} alt="Trophy" title="Tournaments Won" />&nbsp;12
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td top-imageholder" rowSpan="2">
-                            <img className="top-image" src={'https://a.ppy.sh/4908650_1552467424.jpeg'} alt="Profile"/>
-                        </td>
-                        <td className="top-td top-name" colSpan="2" style={{borderBottom: "2px solid lightgray"}}>
-                            <Link to={{pathname: `/users/country/US/1`, page: 1, country: "US"}}>
-                                <img src={require('../../resources/images/country/US.gif')} alt="US"/>
-                            </Link>{' '}
-                            <Link to={{pathname: `/users/id/4908650`}}>im a fancy lad</Link>
-                        </td>
-                        <td className="top-td">
-                        <img className="rank-icon" src={require('../../resources/images/logos/silvermedal.svg')} alt="Silver" title="Rank" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td" title="1590.2216501292746">
-                            1590.2 Elo
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;74.75%
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/trophy.svg')} alt="Trophy" title="Tournaments Won" />&nbsp;4
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td top-imageholder" rowSpan="2">
-                            <img className="top-image" src={'https://a.ppy.sh/4787150_1552467424.jpeg'} alt="Profile"/>
-                        </td>
-                        <td className="top-td top-name" colSpan="2" style={{borderBottom: "2px solid lightgray"}}>
-                            <Link to={{pathname: `/users/country/US/1`, page: 1, country: "US"}}>
-                                <img src={require('../../resources/images/country/US.gif')} alt="US"/>
-                            </Link>{' '}
-                            <Link to={{pathname: `/users/id/4787150`}}>Vaxei</Link>
-                        </td>
-                        <td className="top-td">
-                        <img className="rank-icon" src={require('../../resources/images/logos/bronzemedal.svg')} alt="Bronze" title="Rank" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td" title="1588.2162053214329">
-                            1588.2 Elo
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;80.82%
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/trophy.svg')} alt="Trophy" title="Tournaments Won" />&nbsp;6
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td top-imageholder" rowSpan="2">
-                            <img className="top-image" src={'https://a.ppy.sh/4650315_1552467424.jpeg'} alt="Profile"/>
-                        </td>
-                        <td className="top-td top-name" colSpan="2" style={{borderBottom: "2px solid lightgray"}}>
-                            <Link to={{pathname: `/users/country/US/1`, page: 1, country: "US"}}>
-                                <img src={require('../../resources/images/country/US.gif')} alt="US"/>
-                            </Link>{' '}
-                            <Link to={{pathname: `/users/id/4650315`}}>idke</Link>
-                        </td>
-                        <td className="top-td">
-                            4<sup>th</sup>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td" title="1534.4926941671815">
-                            1534.5 Elo
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;73.33%
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/trophy.svg')} alt="Trophy" title="Tournaments Won" />&nbsp;4
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td top-imageholder" rowSpan="2">
-                            <img className="top-image" src={'https://a.ppy.sh/1473890_1552467424.jpeg'} alt="Profile"/>
-                        </td>
-                        <td className="top-td top-name" colSpan="2" style={{borderBottom: "2px solid lightgray"}}>
-                            <Link to={{pathname: `/users/country/GB/1`, page: 1, country: "RO"}}>
-                                <img src={require('../../resources/images/country/RO.gif')} alt="RO"/>
-                            </Link>{' '}
-                            <Link to={{pathname: `/users/id/1473890`}}>Badeu</Link>
-                        </td>
-                        <td className="top-td">
-                            5<sup>th</sup>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="top-td" title="1514.457815236453">
-                            1514.5 Elo
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/winrate.svg')} alt="Thumbsup" title="Win Rate" />&nbsp;75.73%
-                        </td>
-                        <td className="top-td">
-                            <img className="table-icon" src={require('../../resources/images/logos/trophy.svg')} alt="Trophy" title="Tournaments Won" />&nbsp;2
-                        </td>
-                    </tr>
+                    {top5}
                 </tbody>
             </table>
         );
