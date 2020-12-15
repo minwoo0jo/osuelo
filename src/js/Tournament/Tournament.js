@@ -20,6 +20,7 @@ class Tournament extends Component {
   }
 
   componentDidMount () {
+    document.title = "https://osuelo.com" + this.props.location.pathname
     var endpoint = url.api + 'tournaments/'
     if(this.state.tournamentId === undefined)
       endpoint += this.state.tournamentName
@@ -28,8 +29,10 @@ class Tournament extends Component {
     axios.get(endpoint).then((response) => {
       if(response.data.length === 0)
         this.setState({pageData: null})
-      else
+      else {
         this.setState({pageData: response.data})
+        document.title = this.state.pageData.tournament.tournamentName
+      }
     }).catch((error) => {
       console.log(error)
       this.setState({pageData: null})

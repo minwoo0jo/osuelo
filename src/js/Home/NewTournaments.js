@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../../resources/css/Home2.css';
 import { Link } from 'react-router-dom';
-import url from '../../resources/config.json';
-import axios from 'axios';
 import NotFound from '../NotFound.js';
 
 

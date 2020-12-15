@@ -23,6 +23,7 @@ class TournamentList extends Component {
   }
 
   componentDidMount () {
+    document.title = "Tournament Listing"
     axios.get(url.api + 'tournaments/page/' + this.state.pageNum).then((response) => {
       if(response.data[1].length === 0)
         this.setState({pageData: null})

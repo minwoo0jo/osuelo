@@ -4,7 +4,6 @@ import TopPlayerTable from './TopPlayerTable.js';
 import NewTournaments from './NewTournaments.js';
 import url from '../../resources/config.json';
 import axios from 'axios';
-import NotFound from '../NotFound.js';
 
 class Home2 extends Component {
     constructor(props) {
@@ -15,6 +14,7 @@ class Home2 extends Component {
         }
     }
     componentDidMount() {
+        document.title = "osu! Elo System"
         var endpoint = url.api + 'tournaments/'
         axios.get(endpoint).then((response) => {
           if(response.data.length === 0)

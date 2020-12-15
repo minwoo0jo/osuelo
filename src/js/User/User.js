@@ -39,6 +39,7 @@ class User extends Component {
   }
 
   componentDidMount () {
+    document.title = "https://osuelo.com" + this.props.location.pathname
     var endpoint = url.api + 'users/'
     if(this.state.userId === undefined)
       endpoint += this.state.userName
@@ -47,8 +48,10 @@ class User extends Component {
     axios.get(endpoint).then((response) => {
       if(response.data.length === 0)
         this.setState({pageData: null})
-      else
+      else {
         this.setState({pageData: response.data, userId: response.data.user.userId, userName: response.data.user.userName})
+        document.title = this.state.pageData.user.userName + "'s Profile"
+      }
     }).catch((error) => {
       console.log(error)
       this.setState({pageData: null})

@@ -32,6 +32,7 @@ class Submit extends Component {
             error: false,
             validInput: false
         }
+        document.title = "Submit Tournament"
     }
     handleChange(e, field) {
         if(field === 'name') {

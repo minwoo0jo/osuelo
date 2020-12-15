@@ -50,6 +50,7 @@ class CompleteUserList extends Component {
   }
 
   componentDidMount () {
+    document.title = "Complete User Listing"
     var endpoint = url.api + 'users/'
     if(this.state.country !== 'Global')
       endpoint += 'country/' + this.state.country + '/'
