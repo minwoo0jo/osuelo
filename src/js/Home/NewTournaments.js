@@ -10,20 +10,8 @@ class NewTournaments extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            pageData: undefined,
+            pageData: this.props.pageData,
         }
-    }
-    componentDidMount() {
-        var endpoint = url.api + 'tournaments/'
-        axios.get(endpoint).then((response) => {
-          if(response.data.length === 0)
-            this.setState({pageData: null})
-          else
-            this.setState({pageData: response.data[1]})
-        }).catch((error) => {
-          console.log(error)
-          this.setState({pageData: null})
-        })
     }
     render() {
         var imgChallonge = undefined
@@ -53,6 +41,10 @@ class NewTournaments extends Component {
                 var rankRestrict = "- "
                 if(this.state.pageData[i].rankRestrict === "None" || (this.state.pageData[i].rankRestrict[0] === "1" && this.state.pageData[i].rankRestrict[1] === "-"))
                     rankRestrict += "Open Rank"
+                else if(this.state.pageData[i].rankRestrict === "Invitational")
+                    rankRestrict += "Invitational"
+                else if(this.state.pageData[i].rankRestrict[this.state.pageData[i].rankRestrict.length - 1] === "+")
+                    rankRestrict += "Rank " + this.state.pageData[i].rankRestrict
                 else
                     rankRestrict += this.state.pageData[i].rankRestrict + " Rank Range"
                 recentTournaments[i] =

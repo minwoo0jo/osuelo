@@ -2,10 +2,45 @@ import React, { Component } from 'react';
 import '../../resources/css/Home2.css';
 import TopPlayerTable from './TopPlayerTable.js';
 import NewTournaments from './NewTournaments.js';
+import url from '../../resources/config.json';
+import axios from 'axios';
+import NotFound from '../NotFound.js';
 
 class Home2 extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            newTournaments: undefined,
+            topPlayers: undefined
+        }
+    }
+    componentDidMount() {
+        var endpoint = url.api + 'tournaments/'
+        axios.get(endpoint).then((response) => {
+          if(response.data.length === 0)
+            this.setState({newTournaments: null})
+          else
+            this.setState({newTournaments: response.data[1]})
+        }).catch((error) => {
+          console.log(error)
+          this.setState({newTournaments: null})
+        })
+        endpoint = url.api + 'users/'
+        axios.get(endpoint).then((response) => {
+          if(response.data.length === 0)
+            this.setState({topPlayers: null})
+          else
+            this.setState({topPlayers: response.data[1]})
+        }).catch((error) => {
+          console.log(error)
+          this.setState({topPlayers: null})
+        })
+    }
     render() {
-        
+        if(this.state.topPlayers === undefined || this.state.newTournaments === undefined)
+            return (
+                <p>Loading...</p>
+            )
         return (
             <div className="WholePage">
                 <div className="LeftSide main-left">
@@ -15,12 +50,12 @@ class Home2 extends Component {
                         <h6>The 1v1 osu! Elo System Database</h6>
                     </div>
                     <div className="BottomSide">
-                        <NewTournaments />
+                        <NewTournaments pageData = {this.state.newTournaments}/>
                     </div>
                 </div>
                 <div className="RightSide main-right">
                     <div className="Top5Players">
-                        <TopPlayerTable />
+                        <TopPlayerTable pageData = {this.state.topPlayers}/>
                     </div>
                 </div>
             </div>

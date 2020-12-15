@@ -9,20 +9,8 @@ class TopPlayerTable extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            pageData: undefined,
+            pageData: this.props.pageData,
         }
-    }
-    componentDidMount() {
-        var endpoint = url.api + 'users/'
-        axios.get(endpoint).then((response) => {
-          if(response.data.length === 0)
-            this.setState({pageData: null})
-          else
-            this.setState({pageData: response.data[1]})
-        }).catch((error) => {
-          console.log(error)
-          this.setState({pageData: null})
-        })
     }
     render() {
         if(this.state.pageData === null)
