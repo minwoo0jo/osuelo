@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class About extends Component {
+    constructor(props) {
+        super(props)
+        document.title = "About Page"
+    }
   render() {
     return (
         <div className="App">

@@ -61,16 +61,19 @@ class User extends Component {
   componentWillReceiveProps(newProps) {
     if(this.state.pageData !== undefined && newProps.location.pathname !== undefined) {
       this.setState({pageData: undefined})
-      window.scrollTo(0, 0)
       if(newProps.location.id !== undefined || newProps.location.name !== undefined) {
+        document.title = "https://osuelo.com" + newProps.location.pathname
+        window.scrollTo(0, 0)
         if(newProps.location.id !== undefined && this.state.userId !== newProps.location.id) {
           let endpoint = url.api + 'users/'
           endpoint += 'id/' + newProps.location.id
           axios.get(endpoint).then((response) => {
             if(response.data.length === 0)
               this.setState({pageData: null, userId: newProps.location.id})
-            else
+            else {
               this.setState({pageData: response.data, userId: newProps.location.id})
+              document.title = this.state.pageData.user.userName + "'s Profile"
+            }
           }).catch((error) => {
             console.log(error)
             this.setState({pageData: null, userId: newProps.location.id})
@@ -97,8 +100,9 @@ class User extends Component {
         axios.get(endpoint).then((response) => {
           if(response.data.length === 0)
             this.setState({pageData: null, userName: undefined, userId: id})
-          else 
+          else {
             this.setState({pageData: response.data, userName: undefined, userId: id})
+          }
         }).catch((error) => {
           console.log(error)
           this.setState({pageData: null, userName: undefined, userId: id})

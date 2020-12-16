@@ -33,7 +33,6 @@ class UserList extends Component {
   }
 
   handleSort(e, field) {
-    document.title = "User Listing"
     e.preventDefault()
     var endpoint = url.api + 'users/'
     if(this.state.country !== 'Global')
@@ -52,6 +51,7 @@ class UserList extends Component {
   }
 
   componentDidMount () {
+    document.title = "User Listing"
     var endpoint = url.api + 'users/'
     if(this.state.country !== 'Global')
       endpoint += 'country/' + this.state.country + '/'
