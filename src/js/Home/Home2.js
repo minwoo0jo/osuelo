@@ -15,28 +15,32 @@ class Home2 extends Component {
     }
     componentDidMount() {
         document.title = "osu! Elo System"
-        var endpoint = url.api + 'tournaments/'
+        var endpoint = url.api + 'tournaments/recent'
         axios.get(endpoint).then((response) => {
           if(response.data.length === 0)
             this.setState({newTournaments: null})
           else
-            this.setState({newTournaments: response.data[1]})
+            this.setState({newTournaments: response.data})
         }).catch((error) => {
           console.log(error)
           this.setState({newTournaments: null})
         })
-        endpoint = url.api + 'users/'
+        endpoint = url.api + 'users/top'
         axios.get(endpoint).then((response) => {
           if(response.data.length === 0)
             this.setState({topPlayers: null})
           else
-            this.setState({topPlayers: response.data[1]})
+            this.setState({topPlayers: response.data})
         }).catch((error) => {
           console.log(error)
           this.setState({topPlayers: null})
         })
     }
     render() {
+        if(this.state.topPlayers !== undefined && this.state.newTournaments === undefined)
+            console.log("P")
+        else if(this.state.topPlayers === undefined && this.state.newTournaments !== undefined)
+            console.log("T")
         if(this.state.topPlayers === undefined || this.state.newTournaments === undefined)
             return (
                 <p>Loading...</p>
