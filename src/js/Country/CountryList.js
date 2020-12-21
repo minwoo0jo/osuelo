@@ -22,6 +22,7 @@ class CountryList extends Component {
   }
 
   componentDidMount () {
+    document.title = "Country Listing"
     var endpoint = url.api + 'users/country?p=' + this.state.pageNum
     axios.get(endpoint).then((response) => {
         if(response.data[1].length === 0)

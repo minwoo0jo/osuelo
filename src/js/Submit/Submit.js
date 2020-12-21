@@ -134,8 +134,8 @@ class Submit extends Component {
         if(!this.state.testing && this.state.dateValid && this.state.name !== '' && this.state.challonge !== '' && (this.state.nameValid || this.state.names.length + this.state.unlikely.length === 0)) {
             this.setState({testing: true})
             let json = {
-                challongeName: this.state.name,
-                link: this.state.challonge,
+                tournamentName: this.state.name,
+                challonge: this.state.challonge,
                 startDate: this.state.date,
                 nameChanges: this.state.mapping,
                 forum: this.state.forum,
